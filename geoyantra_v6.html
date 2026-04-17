@@ -1,0 +1,1970 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html,body{width:100%;min-height:100%;}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--acc:#1D9E75;--acc-dk:#0F6E56;--acc-lt:#E1F5EE;--acc-tx:#085041;--navy:#1a3a2a;--warn-bg:#FAEEDA;--warn-tx:#633806;--danger-bg:#FCEBEB;--danger-tx:#501313;--blue-bg:#E6F1FB;--blue-tx:#0C447C;--color-text-primary:#0f172a;--color-text-secondary:#47525e;--color-text-tertiary:#6b7b8b;--color-background-primary:#ffffff;--color-background-secondary:#f6f9fb;--color-background-tertiary:#f2f2f2;--color-border-tertiary:rgba(17,37,71,0.08);--color-border-secondary:rgba(17,37,71,0.12);--page-bg:linear-gradient(180deg,#eaf4f7 0%,#f8fbff 45%,#ffffff 100%);--app-bg:rgba(255,255,255,0.96);--header-bg:rgba(255,255,255,0.95);--card-bg:rgba(255,255,255,0.96);--card-shadow:0 20px 45px rgba(17,37,71,0.06);--nav-item-bg:rgba(255,255,255,0.78);--nav-item-hover-bg:rgba(255,255,255,0.98);--input-bg:rgba(249,251,253,0.98);--input-border:rgba(17,37,71,0.12);--button-bg:rgba(255,255,255,0.95);--button-hover-bg:rgba(255,255,255,1);--button-shadow:0 12px 28px rgba(17,37,71,0.08)}
+.dark{--page-bg:linear-gradient(180deg,#04101a 0%,#081c2c 45%,#0c2840 100%);--app-bg:rgba(8,18,32,0.96);--header-bg:rgba(8,18,32,0.92);--card-bg:rgba(9,20,37,0.92);--card-shadow:0 24px 80px rgba(0,0,0,0.35);--nav-item-bg:rgba(10,22,38,0.9);--nav-item-hover-bg:rgba(17,31,45,0.95);--text-primary:#edf2f8;--text-secondary:#a7b8cc;--text-tertiary:#7f9bb3;--color-text-primary:#edf2f8;--color-text-secondary:#a7b8cc;--color-text-tertiary:#7f9bb3;--color-background-primary:rgba(15,26,41,0.92);--color-background-secondary:rgba(18,28,45,0.9);--color-background-tertiary:rgba(13,22,35,0.92);--color-border-tertiary:rgba(255,255,255,0.08);--color-border-secondary:rgba(255,255,255,0.14);--page-bg:linear-gradient(180deg,#04101a 0%,#081c2c 45%,#0c2840 100%);--app-bg:rgba(8,18,32,0.96);--header-bg:rgba(8,18,32,0.92);--input-bg:rgba(18,28,45,0.92);--input-border:rgba(255,255,255,0.14);--button-bg:rgba(17,29,45,0.98);--button-hover-bg:rgba(29,46,70,0.98);--button-shadow:0 12px 28px rgba(0,0,0,0.28)}
+body{font-family:var(--font-sans,'Inter',system-ui,sans-serif);background:var(--page-bg);color:var(--color-text-primary);font-size:13px;min-height:100vh;}
+.app{position:relative;max-width:1320px;margin:20px auto;overflow:hidden;border-radius:24px;background:var(--app-bg);border:1px solid rgba(17,37,71,0.08);box-shadow:0 24px 80px rgba(17,37,71,0.12);}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:var(--header-bg);border-bottom:1px solid rgba(17,37,71,0.06);backdrop-filter:blur(10px);}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#1d9e75,#185fa5);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 14px 32px rgba(29,158,117,0.18)}
+.logo-name{font-size:17px;font-weight:700;letter-spacing:-0.35px;font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+.logo-name em{color:var(--acc);font-style:normal}
+.logo-sub{font-size:10px;color:var(--color-text-tertiary);letter-spacing:0.15px}
+.status-pill{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--acc-tx);background:var(--acc-lt);padding:3px 10px;border-radius:20px}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.onboarding-tip{position:absolute;top:90px;right:24px;width:320px;max-width:calc(100% - 32px);padding:18px 18px 16px;background:var(--card-bg);border:1px solid var(--color-border-tertiary);border-radius:20px;box-shadow:0 24px 60px rgba(17,37,71,0.14);z-index:30;font-size:13px;color:var(--color-text-primary);opacity:0;transform:translateY(-12px);visibility:hidden;pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility .22s ease;}
+.onboarding-tip.hidden{opacity:0;transform:translateY(-12px);visibility:hidden;pointer-events:none;}
+.onboarding-tip.visible{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto;}
+.onboarding-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.onboarding-head span{font-weight:700;color:var(--text-secondary)}
+.onboarding-tip p{font-size:12.5px;line-height:1.7;color:var(--color-text-secondary);margin-bottom:10px}
+.onboarding-list{padding-left:18px;color:var(--color-text-secondary);line-height:1.7}
+.onboarding-list li{margin-bottom:6px}
+
+/* LAYOUT */
+.body{display:flex;min-height:640px}
+.nav{width:220px;flex-shrink:0;background:transparent;padding:16px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;}
+.ns{font-size:9px;font-weight:700;color:var(--text-secondary);letter-spacing:1px;padding:10px 8px 4px;text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;font-size:12px;cursor:pointer;color:var(--text-secondary);transition:all .18s;box-shadow:0 12px 24px rgba(17,37,71,0.04);background:var(--nav-item-bg);backdrop-filter:blur(10px)}
+.ni:hover{transform:translateX(2px);background:var(--nav-item-hover-bg);color:var(--color-text-primary)}
+.ni.active{background:linear-gradient(135deg,#1d9e75,#185fa5);color:#fff;box-shadow:0 18px 30px rgba(29,158,117,0.2)}
+.nd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.nbadge{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:8px;background:rgba(29,158,117,0.18);color:var(--acc-tx)}
+.ni.active .nbadge{background:rgba(255,255,255,0.24);color:#fff}
+.nav::-webkit-scrollbar{width:6px}
+.nav::-webkit-scrollbar-thumb{background:rgba(17,37,71,0.12);border-radius:3px}
+.main{flex:1;overflow:auto;min-width:0}
+.panel{display:none;padding:14px;gap:12px;flex-direction:column}
+.panel.on{display:flex}
+
+/* CARDS */
+.card{background:var(--card-bg);border:none;border-radius:18px;padding:18px;box-shadow:var(--card-shadow)}
+.chd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ct{font-size:10px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.8px}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+
+/* METRIC CARDS */
+.mc{background:var(--color-background-secondary);border-radius:8px;padding:9px 11px;border:0.5px solid var(--color-border-tertiary)}
+.ml{font-size:10px;color:var(--color-text-tertiary);margin-bottom:3px;font-weight:500}
+.mv{font-size:16px;font-weight:600;color:var(--color-text-primary)}
+.ms{font-size:9px;color:var(--color-text-secondary);margin-top:1px}
+
+/* IMPROVED FORM INPUTS — clear separation */
+.field{margin-bottom:10px}
+.field-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:5px;letter-spacing:0.1px}
+.field-input{width:100%;font-size:13px;padding:10px 12px;border-radius:14px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--color-text-primary);outline:none;transition:all .18s;font-family:var(--font-sans,'Inter',system-ui,sans-serif);box-shadow:inset 0 1px 2px rgba(17,37,71,0.05)}
+.field-input:focus{border-color:var(--acc);box-shadow:0 10px 30px rgba(29,158,117,0.12)}
+.field-input::placeholder{color:#7b8b9b;font-size:12px}
+.field-hint{font-size:10px;color:var(--color-text-tertiary);margin-top:3px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+select.field-input{cursor:pointer}
+textarea.field-input{resize:vertical;font-family:monospace;font-size:11px;min-height:70px;background:var(--color-background-secondary)}
+.field-group{background:var(--color-background-secondary);border-radius:9px;padding:11px 12px;margin-bottom:10px;border:0.5px solid var(--color-border-tertiary)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:14px;border:1px solid rgba(17,37,71,0.12);background:var(--button-bg);color:var(--color-text-primary);font-size:12px;cursor:pointer;font-weight:600;transition:all .18s;box-shadow:var(--button-shadow);position:relative}
+#onboarding-btn::after{content:attr(data-tip);position:absolute;bottom:100%;right:50%;transform:translateX(50%) translateY(10px);white-space:nowrap;padding:6px 10px;border-radius:10px;background:rgba(17,37,71,0.92);color:#fff;font-size:11px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility .18s ease;}
+#onboarding-btn:hover::after,#onboarding-btn:focus::after{opacity:1;visibility:visible;transform:translateX(50%) translateY(0)}
+.mobile-nav-toggle{display:none!important;min-width:40px;min-height:40px;padding:0 10px;justify-content:center;font-size:18px;border-radius:14px;}
+.scroll-hint{display:none;align-items:center;gap:8px;font-size:11px;color:var(--color-text-secondary);padding:8px 12px;border-radius:12px;background:rgba(255,255,255,0.92);border:1px solid var(--color-border-tertiary);margin-bottom:12px;}
+.scroll-hint svg{width:14px;height:14px;opacity:0.7;}
+.btn:hover{transform:translateY(-1px);background:var(--button-hover-bg);box-shadow:0 16px 32px rgba(17,37,71,0.12)}
+.bp{background:linear-gradient(135deg,#1d9e75,#185fa5);color:#fff;border-color:transparent;width:100%;margin-top:2px}
+.bp:hover{background:linear-gradient(135deg,#158760,#124d7e)}
+.field-group-title{font-size:9.5px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:14px;border:1px solid rgba(17,37,71,0.12);background:rgba(255,255,255,0.95);color:var(--color-text-primary);font-size:12px;cursor:pointer;font-weight:600;transition:all .18s;box-shadow:0 12px 28px rgba(17,37,71,0.08);position:relative}
+.btn:hover{transform:translateY(-1px);background:rgba(255,255,255,1);box-shadow:0 16px 32px rgba(17,37,71,0.12)}
+.bp{background:linear-gradient(135deg,#1d9e75,#185fa5);color:#fff;border-color:transparent;width:100%;margin-top:2px}
+.bp:hover{background:linear-gradient(135deg,#158760,#124d7e)}
+.bdl{background:rgba(238,246,255,0.95);color:var(--blue-tx);border-color:rgba(181,212,244,0.7)}
+.bdl:hover{background:rgba(217,228,245,0.95)}
+.bxl{background:#EAF3DE;color:#27500A;border-color:#C0DD97}
+.bxl:hover{background:#C0DD97}
+.bai{background:#EEEDFE;color:#3C3489;border-color:#CECBF6}
+.bai:hover{background:#CECBF6}
+.bpdf{background:var(--danger-bg);color:var(--danger-tx);border-color:#F09595}
+.bpdf:hover{background:#F7C1C1}
+.bimp{background:var(--warn-bg);color:var(--warn-tx);border-color:#FAC775}
+.bimp:hover{background:#FAC775}
+.dl-bar{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.pg{background:var(--acc-lt);color:var(--acc-tx)}
+.pw{background:var(--warn-bg);color:var(--warn-tx)}
+.pr{background:var(--danger-bg);color:var(--danger-tx)}
+.pb{background:var(--blue-bg);color:var(--blue-tx)}
+.pp{background:#EEEDFE;color:#3C3489}
+
+/* INSIGHT BOXES */
+.ins{border-left:3px solid var(--acc);border-radius:0 7px 7px 0;padding:9px 12px;background:var(--acc-lt);margin-top:8px}
+.ins-t{font-size:10px;font-weight:600;color:var(--acc-tx);margin-bottom:3px}
+.ins p{font-size:11px;color:var(--acc-tx);line-height:1.55}
+.note-box{border-left:3px solid #378ADD;border-radius:0 7px 7px 0;padding:9px 12px;background:var(--blue-bg);margin-top:8px}
+.note-box p{font-size:11px;color:var(--blue-tx);line-height:1.6}
+
+.developer-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;width:min(720px,100%);margin:0 auto;padding:16px 18px;border-radius:14px;background:linear-gradient(180deg,var(--color-background-secondary),var(--color-background-primary));border:1px solid var(--color-border-tertiary);box-shadow:0 8px 20px rgba(17,37,71,0.06)}
+.dark .developer-card{box-shadow:0 10px 24px rgba(0,0,0,0.28)}
+.developer-copy{display:flex;flex-direction:column;gap:2px}
+.developer-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.7px;text-transform:uppercase;color:var(--color-text-secondary)}
+.developer-name{font-size:13px;color:var(--color-text-primary)}
+.developer-name strong{font-size:14px}
+.developer-note{font-size:11px;color:var(--color-text-secondary);margin:0 auto 10px;max-width:720px}
+.social-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.social-link{width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);transition:transform .18s,background .18s,border-color .18s,box-shadow .18s}
+.social-link svg{width:17px;height:17px;display:block}
+.icon-web{color:#112547}
+.icon-github{fill:#111827}
+.icon-facebook{fill:#1877F2}
+.icon-instagram{fill:#E4405F}
+.icon-linkedin{fill:#0A66C2}
+.social-link:hover{transform:translateY(-2px) scale(1.02);background:#fff;border-color:#c2cde0;box-shadow:0 8px 16px rgba(17,37,71,0.14)}
+.social-link:focus-visible{outline:none;border-color:#0C5D9A;box-shadow:0 0 0 3px rgba(12,93,154,0.2)}
+.dark .social-link:hover{background:#0f213b;border-color:#355178}
+.dark .social-link svg{fill:var(--color-text-secondary)!important;color:var(--color-text-secondary)!important}
+.dark .social-link:hover svg{fill:var(--color-text-primary)!important;color:var(--color-text-primary)!important}
+
+@media(max-width:560px){
+  .developer-card{padding:12px}
+  .developer-copy{width:100%}
+}
+
+/* THEORY BOX */
+.theory{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:9px;padding:12px 14px;margin-top:10px}
+.theory-title{font-size:10px;font-weight:600;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;display:flex;align-items:center;gap:6px;cursor:pointer}
+.theory-body{font-size:11px;color:var(--color-text-secondary);line-height:1.7;display:none}
+.theory-body.open{display:block}
+.theory-body .eq{font-family:Georgia,serif;font-style:italic;background:var(--color-background-primary);border-radius:5px;padding:5px 10px;margin:5px 0;font-size:11px;color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary)}
+.theory-body table{width:100%;border-collapse:collapse;font-size:10.5px;margin:6px 0}
+.theory-body table th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-weight:500}
+.theory-body table td{padding:4px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.theory-body table tr:nth-child(even) td{background:var(--color-background-primary)}
+
+/* TABLE */
+.tbl{width:100%;font-size:10.5px;border-collapse:collapse}
+.tbl th{font-size:9.5px;color:#fff;background:var(--navy);text-align:left;padding:6px 8px;font-weight:500}
+.tbl td{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.tbl tr:nth-child(even) td{background:var(--color-background-secondary)}
+.tbl-wrap{overflow-x:auto;margin-top:10px;border-radius:8px;border:0.5px solid var(--color-border-tertiary)}
+
+/* DIVIDER */
+.div{height:0.5px;background:var(--color-border-tertiary);margin:9px 0}
+
+/* RISK BARS */
+.ri{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.rl{font-size:10.5px;color:var(--color-text-secondary);width:130px;flex-shrink:0}
+.rbg{flex:1;height:7px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden}
+.rb{height:100%;border-radius:3px}
+.rpct{font-size:10px;color:var(--color-text-secondary);width:30px;text-align:right;font-weight:600}
+
+/* CHART */
+.cw{position:relative;width:100%;background:#fff;border-radius:18px;padding:16px;box-shadow:inset 0 0 0 1px rgba(17,37,71,0.05);}
+.cw canvas{background:transparent;display:block;width:100%;height:100%;}
+.ai-out{background:var(--color-background-secondary);border-radius:8px;padding:12px;margin-top:8px;font-size:11.5px;line-height:1.7;color:var(--color-text-primary);font-family:Georgia,serif;min-height:60px;border:0.5px solid var(--color-border-tertiary)}
+.imp-z{border:1.5px dashed var(--color-border-secondary);border-radius:7px;padding:10px;text-align:center;cursor:pointer;font-size:10.5px;color:var(--color-text-secondary);margin-bottom:8px;transition:background .12s}
+.imp-z:hover{background:var(--color-background-secondary)}
+input[type=range]{accent-color:var(--acc);width:100%}
+.rr{display:flex;align-items:center;gap:8px}
+.rv{font-size:11px;font-weight:600;width:34px;color:var(--color-text-primary)}
+
+/* PDF CHECKLIST */
+.chk-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:0.5px solid var(--color-border-tertiary);margin-bottom:5px;cursor:pointer;background:var(--color-background-primary);transition:all .12s}
+.chk-item:hover{background:var(--color-background-secondary)}
+.chk-item.selected{border-color:var(--acc);background:var(--acc-lt)}
+.chk-box{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--color-background-primary)}
+.chk-item.selected .chk-box{background:var(--acc);border-color:var(--acc)}
+.chk-box svg{display:none}.chk-item.selected .chk-box svg{display:block}
+.chk-lbl{font-size:11.5px;color:var(--color-text-primary);font-weight:500}
+.chk-sub{font-size:9.5px;color:var(--color-text-secondary);margin-top:1px}
+.chk-status{margin-left:auto}
+
+/* GANTT */
+.gantt-label{width:115px;font-size:10px;color:var(--color-text-secondary);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gantt-track{flex:1;position:relative;height:17px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden}
+.gantt-bar{position:absolute;height:100%;border-radius:3px;display:flex;align-items:center;padding:0 5px;font-size:9px;color:#fff;white-space:nowrap;overflow:hidden}
+
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .field-row,.field-row-3{grid-template-columns:1fr}
+  .body{flex-direction:column}
+  .app{overflow:visible}
+  .hdr{padding:9px 12px;flex-wrap:wrap;gap:6px;justify-content:space-between}
+  .hdr .mobile-nav-toggle{display:inline-flex!important}
+  .nav{width:100%;display:none;flex-direction:column;gap:6px;padding:0 8px 8px;overflow:hidden;border-right:none;border-bottom:0.5px solid var(--color-border-tertiary);background:transparent}
+  .nav.open{display:flex}
+  .scroll-hint{display:flex}
+  .ni{font-size:10px;padding:9px 10px;border-radius:10px}
+  .ns{font-size:8px;padding:6px 4px 1px;width:100%}
+  .nbadge{display:none}
+  .main{overflow-x:auto}
+  .panel{padding:10px;gap:8px}
+  .card{padding:11px 10px}
+  .logo-sub{display:none}
+  .logo-name{font-size:14px}
+  .dl-bar{gap:3px;flex-wrap:wrap}
+  .btn{font-size:10.5px;padding:6px 10px}
+  .chd{flex-direction:column;align-items:flex-start;gap:4px}
+}
+@media(max-width:500px){
+  .hdr{gap:10px}
+  .mobile-nav-toggle{margin-right:4px}
+}
+
+</style>
+
+<h2 style="position:absolute;left:-9999px">GeoYantra Pro — complete geotechnical and hydrological analysis platform</h2>
+
+<div class="app">
+<div class="hdr">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M2 16 L5 9 L8 13 L12 4 L18 9" stroke="#1D9E75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="5" cy="9" r="1.3" fill="#5DCAA5"/>
+        <circle cx="12" cy="4" r="1.3" fill="#5DCAA5"/>
+        <path d="M2 18.5 Q10 16.5 18 18.5" stroke="#5DCAA5" stroke-width="0.7" opacity="0.5"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-name">Geo<em>Yantra</em> <span style="font-size:10px;font-weight:400;color:var(--acc);background:var(--acc-lt);padding:1px 7px;border-radius:10px;margin-left:3px">Pro</span></div>
+      <div class="logo-sub">Geotechnical &amp; Hydrological Analysis Platform</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button id="mobile-nav-toggle" class="btn bdl mobile-nav-toggle" type="button" onclick="toggleMobileNav()" aria-expanded="false" aria-label="Open menu">☰</button>
+    <div style="font-size:10px;color:var(--color-text-tertiary)" id="proj-disp">Project: —</div>
+    <button id="theme-toggle" class="btn bdl" type="button">Dark mode</button>
+    <button id="onboarding-btn" class="btn bdl" type="button" onclick="toggleOnboarding()" data-tip="Show quick tour">i</button>
+    <div class="status-pill"><div class="status-dot"></div><span id="status-txt">Ready</span></div>
+  </div>
+</div>
+<div id="onboarding-tip" class="onboarding-tip hidden">
+  <div class="onboarding-head"><span>Quick Start</span><button class="btn bdl" type="button" onclick="hideOnboarding()">Close</button></div>
+  <p>Welcome to GeoYantra Pro. Switch between analyses using the left menu, choose light/dark mode from the header or Settings, and export charts/PDF from each panel.</p>
+  <ul class="onboarding-list">
+    <li>Use the side nav to move between modules quickly.</li>
+    <li>Settings lets you pick theme, chart style, and export background.</li>
+    <li>Charts and tables update after you run each analysis.</li>
+  </ul>
+</div>
+
+<div class="body">
+<div class="nav">
+  <div class="ns">Geotechnical</div>
+  <div class="ni active" onclick="show('gradation',this)"><div class="nd" style="background:#378ADD"></div>Soil gradation</div>
+  <div class="ni" onclick="show('hydrometer',this)"><div class="nd" style="background:#D4537E"></div>Hydrometer</div>
+  <div class="ni" onclick="show('blend',this)"><div class="nd" style="background:#1D9E75"></div>Soil blending</div>
+  <div class="ni" onclick="show('plasticity',this)"><div class="nd" style="background:#1D9E75"></div>Plasticity</div>
+  <div class="ni" onclick="show('cbr',this)"><div class="nd" style="background:#EF9F27"></div>CBR</div>
+  <div class="ni" onclick="show('compaction',this)"><div class="nd" style="background:#7F77DD"></div>Compaction</div>
+  <div class="ni" onclick="show('consolidation',this)"><div class="nd" style="background:#5B3A8B"></div>Consolidation</div>
+  <div class="ni" onclick="show('bearing',this)"><div class="nd" style="background:#D85A30"></div>Bearing capacity</div>
+  <div class="ns">Hydrology</div>
+  <div class="ni" onclick="show('pet',this)"><div class="nd" style="background:#1D9E75"></div>PET</div>
+  <div class="ni" onclick="show('runoff',this)"><div class="nd" style="background:#378ADD"></div>Runoff (SCS-CN)</div>
+  <div class="ns">Planning</div>
+  <div class="ni" onclick="show('gantt',this)"><div class="nd" style="background:#888780"></div>Gantt chart</div>
+  <div class="ns">Reports</div>
+  <div class="ni" onclick="show('settings',this)"><div class="nd" style="background:#5F5E5A"></div>Chart settings</div>
+  <div class="ni" onclick="show('pdfexport',this)"><div class="nd" style="background:#A32D2D"></div>PDF lab report</div>
+  <div class="ni" onclick="show('interpretation',this)"><div class="nd" style="background:#1D9E75"></div>AI report <span class="nbadge">AI</span></div>
+  <div class="ns">About</div>
+  <div class="ni" onclick="show('developer',this)"><div class="nd" style="background:#0C5D9A"></div>Meet the Developer</div>
+</div>
+
+<div class="main">
+  <div class="scroll-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l-4 4 4 4"/><path d="M3 11h18"/></svg>Swipe left/right to view hidden content</div>
+
+<!-- ══════════ GRADATION ══════════ -->
+<div class="panel on" id="panel-gradation">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Particle size data</span></div>
+      <div style="display:flex;gap:4px;margin-bottom:9px;flex-wrap:wrap" id="gvt">
+        <div class="pill pg" style="cursor:pointer;border:1px solid var(--acc)" onclick="setGV('combined',this)">Combined</div>
+        <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setGV('sieve',this)">Sieve only</div>
+        <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setGV('hydro',this)">Hydrometer only</div>
+      </div>
+      <div class="imp-z" onclick="document.getElementById('imp-grad').click()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align:middle;margin-right:4px"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Import Excel / CSV (size mm, % passing)
+        <input type="file" id="imp-grad" accept=".csv,.xlsx,.xls" style="display:none" onchange="importGrad(this)">
+      </div>
+      <div class="field-group">
+        <div class="field-group-title">Sieve analysis data</div>
+        <div class="field"><span class="field-label">Sieve size (mm), % passing — one row per sieve</span><textarea class="field-input" id="sd" rows="7">4.75,60.714
+2.36,47.959
+1.18,34.184
+0.60,25.510
+0.30,21.939
+0.15,18.878
+0.075,16.837</textarea></div>
+      </div>
+      <div class="field-group">
+        <div class="field-group-title">Hydrometer analysis data (optional)</div>
+        <div class="field"><span class="field-label">Particle size (mm), % finer — from hydrometer module</span><textarea class="field-input" id="hd" rows="5">0.0367,16.538
+0.0202,12.753
+0.0083,7.344
+0.0044,3.559
+0.0013,1.936</textarea></div>
+        <div class="dl-bar" style="margin-top:8px">
+          <button class="btn bdl" onclick="fillGradFromHydro()">Load hydrometer analysis data from Hydrometer module</button>
+        </div>
+      </div>
+
+      <!-- USCS PLASTICITY INPUT for gradation module -->
+      <div class="field-group" id="grad-plast-group">
+        <div class="field-group-title" style="display:flex;align-items:center;justify-content:space-between">
+          <span>Plasticity data for USCS classification</span>
+          <span class="pill pb" style="font-size:9px">Mainly required for fines &gt; 50%</span>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Liquid Limit LL (%)</span><input type="number" class="field-input" id="grad-LL" placeholder="e.g. 30" step="0.1"></div>
+          <div class="field"><span class="field-label">Plastic Limit PL (%)</span><input type="number" class="field-input" id="grad-PL" placeholder="e.g. 22" step="0.1"><div class="field-hint">PI is calculated as LL − PL automatically.</div></div>
+        </div>
+      </div>
+
+      <button class="btn bp" onclick="runGrad()">Analyse &amp; classify (USCS)</button>
+
+      <!-- Quick-path button: if fines > 50% send user to plasticity module -->
+      <div id="grad-fine-prompt" style="display:none;margin-top:10px" class="note-box">
+        <p id="grad-fine-prompt-txt" style="font-weight:600;margin-bottom:6px"></p>
+        <p style="margin-bottom:8px;font-size:11px">Fines &gt; 50% → soil is <strong>fine-grained</strong>. USCS classification uses only LL and PI.<br>You can classify it directly below, or open the Plasticity module for the full Casagrande chart.</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+          <button class="btn bai" onclick="classifyFineGrained()">Classify fine-grained soil now</button>
+          <button class="btn bdl" onclick="goToPlasticity()">Open Plasticity module →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chd"><span class="ct">Particle size distribution</span><div id="grad-badge" style="display:none"></div></div>
+      <div class="cw" style="height:200px"><canvas id="gradC" role="img" aria-label="PSD curve">PSD</canvas></div>
+      <div class="dl-bar">
+        <button class="btn bdl" onclick="dlC('gradC','PSD',1)">PNG</button>
+        <button class="btn bdl" onclick="dlC('gradC','PSD',3)">~300dpi</button>
+        <button class="btn bdl" onclick="dlC('gradC','PSD',5)">~500dpi</button>
+      </div>
+      <div class="div"></div>
+      <div class="g4">
+        <div class="mc"><div class="ml">D₁₀ (mm)</div><div class="mv" id="D10">—</div></div>
+        <div class="mc"><div class="ml">D₃₀ (mm)</div><div class="mv" id="D30">—</div></div>
+        <div class="mc"><div class="ml">D₆₀ (mm)</div><div class="mv" id="D60">—</div></div>
+        <div class="mc"><div class="ml">Cᵤ</div><div class="mv" id="CU">—</div></div>
+        <div class="mc"><div class="ml">C꜀</div><div class="mv" id="CC">—</div></div>
+        <div class="mc"><div class="ml">% fines</div><div class="mv" id="FIN">—</div></div>
+        <div class="mc"><div class="ml">% passing 4.75mm</div><div class="mv" id="P475">—</div></div>
+        <div class="mc"><div class="ml">% silt</div><div class="mv" id="SILT">—</div></div>
+      </div>
+      <!-- USCS result box -->
+      <div id="uscs-result-box" style="display:none;margin-top:10px;border-radius:9px;overflow:hidden">
+        <div style="background:var(--navy);color:#fff;padding:9px 13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.4px">USCS CLASSIFICATION</span>
+          <span id="uscs-symbol" style="font-size:22px;font-weight:800;letter-spacing:1px;font-family:Georgia,serif"></span>
+        </div>
+        <div style="background:var(--acc-lt);border:0.5px solid var(--acc);border-top:none;padding:10px 13px">
+          <div id="uscs-name" style="font-size:12px;font-weight:600;color:var(--acc-tx);margin-bottom:5px"></div>
+          <div id="uscs-path" style="font-size:11px;color:var(--acc-tx);line-height:1.65"></div>
+          <div id="uscs-params" style="font-size:10.5px;color:var(--acc-tx);margin-top:7px;padding-top:7px;border-top:0.5px solid rgba(29,158,117,0.3)"></div>
+        </div>
+      </div>
+      <div id="grad-ins" style="display:none" class="ins"><div class="ins-t">Gradation &amp; interpretation</div><p id="grad-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HYDROMETER ══════════ -->
+<div class="panel" id="panel-hydrometer">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">ASTM D422 — 151H hydrometer</span></div>
+      <div class="field-group">
+        <div class="field-group-title">Soil &amp; sample parameters</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Specific gravity Gs</span><input type="number" class="field-input" id="hy-Gs" value="2.68" step="0.01" placeholder="e.g. 2.68"></div>
+          <div class="field"><span class="field-label">Dry mass W (g)</span><input type="number" class="field-input" id="hy-W" value="50" step="0.1" placeholder="e.g. 50 g"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Temperature (°C)</span><input type="number" class="field-input" id="hy-T" value="25" step="0.1" placeholder="e.g. 25°C"><div class="field-hint">Used to determine Ct correction factor</div></div>
+          <div class="field"><span class="field-label">Zero correction Zc</span><input type="number" class="field-input" id="hy-Zc" value="2" step="0.5" placeholder="e.g. +2 or -2"><div class="field-hint">Positive if hydrometer reads high in distilled water</div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Meniscus correction Cm</span><input type="number" class="field-input" id="hy-Cm" value="0.5" step="0.1" placeholder="default 0.5"><div class="field-hint">Default +0.5 for 151H</div></div>
+          <div class="field"><span class="field-label">P₇₅ — % passing 75 µm sieve</span><input type="number" class="field-input" id="hy-P75" value="16.837" step="0.001" placeholder="from sieve analysis"><div class="field-hint">From sieve analysis — used for adjusted % finer</div></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-group-title">Hydrometer readings table</div>
+        <div class="field"><span class="field-label">Time (min), reading — enter as 1.029 or 29</span>
+          <textarea class="field-input" id="hy-data" rows="10">0.5,30
+1,29
+2,28.5
+4,28
+8,27
+15,26
+30,25
+60,24
+120,23
+240,22
+480,21
+1440,20</textarea>
+          <div class="field-hint">Each row: elapsed time (min), hydrometer reading (e.g. 1.029 or 29)</div>
+        </div>
+      </div>
+      <button class="btn bp" onclick="runHydrometer()">Calculate &amp; plot</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Hydrometer analysis results</span></div>
+      <div class="cw" style="height:210px"><canvas id="hydroC" role="img" aria-label="Hydrometer grain size curve">Hydrometer chart</canvas></div>
+      <div class="dl-bar">
+        <button class="btn bdl" onclick="dlC('hydroC','Hydrometer_Analysis',1)">PNG</button>
+        <button class="btn bdl" onclick="dlC('hydroC','Hydrometer_Analysis',3)">~300dpi</button>
+        <button class="btn bdl" onclick="dlC('hydroC','Hydrometer_Analysis',5)">~500dpi</button>
+        <button class="btn bxl" onclick="transferHydroToGrad()">Transfer D & Pa to Gradation</button>
+        <button class="btn bxl" onclick="exportHydroExcel()">Download Excel</button>
+      </div>
+      <div class="div"></div>
+      <div id="hydro-metrics" class="g4" style="display:none">
+        <div class="mc"><div class="ml">% Clay (&lt;0.002mm)</div><div class="mv" id="hy-clay">—</div></div>
+        <div class="mc"><div class="ml">% Silt (adj.)</div><div class="mv" id="hy-silt">—</div></div>
+        <div class="mc"><div class="ml">D₅₀ (mm)</div><div class="mv" id="hy-d50">—</div></div>
+        <div class="mc"><div class="ml">Ct correction</div><div class="mv" id="hy-ct">—</div></div>
+      </div>
+      <div id="hy-tbl-wrap" class="tbl-wrap" style="display:none;max-height:200px;overflow-y:auto">
+        <table class="tbl">
+          <thead><tr><th>t (min)</th><th>R</th><th>Rm</th><th>Rc</th><th>L (cm)</th><th>D (mm)</th><th>P (%)</th><th>Pa (%)</th></tr></thead>
+          <tbody id="hy-tbody"></tbody>
+        </table>
+      </div>
+      <div id="hy-push-note" style="display:none" class="note-box">
+        <p id="hy-push-txt"></p>
+      </div>
+      <div class="theory">
+        <div class="theory-title" onclick="toggleTheory('hydro-theory')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Theory &amp; calculation notes (click to expand)
+        </div>
+        <div class="theory-body" id="hydro-theory">
+          <p><strong>Standard:</strong> ASTM D422 / BS 1377 Part 2 using 151H hydrometer in a 1000 mL cylinder.</p>
+          <p style="margin-top:6px"><strong>Step 1 — Reading conversion:</strong> If the user enters 1.029, convert: R = (1.029 − 1) × 1000 = 29. If entered as 29, use directly.</p>
+          <p style="margin-top:6px"><strong>Step 2 — Meniscus correction:</strong></p>
+          <div class="eq">Rm = R + Cm &nbsp;&nbsp; (Cm = +0.5 for 151H)</div>
+          <p style="margin-top:6px"><strong>Step 3 — Temperature &amp; zero correction:</strong></p>
+          <div class="eq">Rc = Rm + Ct − Zc</div>
+          <p style="margin-top:6px"><strong>Step 4 — Temperature correction factors (Ct):</strong></p>
+          <table><thead><tr><th>T (°C)</th><th>Ct</th><th>T (°C)</th><th>Ct</th></tr></thead><tbody>
+            <tr><td>15</td><td>−1.1</td><td>23</td><td>0.7</td></tr>
+            <tr><td>16</td><td>−0.9</td><td>24</td><td>1.0</td></tr>
+            <tr><td>17</td><td>−0.7</td><td>25</td><td>1.3</td></tr>
+            <tr><td>18</td><td>−0.5</td><td>26</td><td>1.65</td></tr>
+            <tr><td>19</td><td>−0.3</td><td>27</td><td>2.0</td></tr>
+            <tr><td>20</td><td>0.0</td><td>28</td><td>2.5</td></tr>
+            <tr><td>21</td><td>0.2</td><td>29</td><td>3.05</td></tr>
+            <tr><td>22</td><td>0.4</td><td>30</td><td>3.8</td></tr>
+          </tbody></table>
+          <p style="margin-top:8px"><strong>Step 5 — Effective depth L (cm):</strong> Based on calibration of 151H hydrometer in 1000 mL cylinder:</p>
+          <div class="eq">L = 16.295 − 0.2645 × Rm</div>
+          <p style="margin-top:6px"><strong>Step 6 — Viscosity factor K:</strong> Stokes' law constant combining water viscosity and particle density:</p>
+          <div class="eq">K = √[ 30η / ((Gs − Gw) × γw) ]</div>
+          <p style="margin-top:4px;font-size:10.5px;color:var(--color-text-secondary)">Simplified as K ≈ 0.013 for Gs=2.68 at 25°C. Full K table (ASTM D422 Table 1) is interpolated by the engine.</p>
+          <p style="margin-top:6px"><strong>Step 7 — Particle diameter D (mm):</strong></p>
+          <div class="eq">D = K × √(L / t) &nbsp;&nbsp; where t is in minutes</div>
+          <p style="margin-top:6px"><strong>Step 8 — % Finer P (raw hydrometer):</strong></p>
+          <div class="eq">P = (Rc / W) × (Gs / (Gs − 1)) × 100</div>
+          <p style="margin-top:6px"><strong>Step 9 — Adjusted % Finer Pa (CRITICAL):</strong> The hydrometer test is run only on the fines fraction. To express results relative to the total original sample:</p>
+          <div class="eq">Pa = P × (P₇₅ / 100)</div>
+          <p style="margin-top:4px;font-size:10.5px;color:var(--color-text-secondary)">Where P₇₅ is the % passing the 75 µm (No. 200) sieve from the sieve analysis. This adjustment is mandatory for plotting a combined gradation curve.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel-blend">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Soil blend configuration</span><span class="pill pg" style="font-size:10px">Upload A / B</span></div>
+      <div class="field-group">
+        <div class="field-group-title">Soil A gradation</div>
+        <div class="field"><span class="field-label">Particle size (mm), % passing</span>
+          <textarea class="field-input" id="blend-A" rows="7">4.75,52.5
+2.36,43.1
+1.18,34.6
+0.60,26.3
+0.30,20.1
+0.15,16.2
+0.075,12.8</textarea></div>
+        <div class="dl-bar" style="margin-top:8px">
+          <button class="btn bdl" onclick="document.getElementById('imp-blend-A').click()">Upload Soil A</button>
+          <input type="file" id="imp-blend-A" accept=".csv,.xlsx,.xls" style="display:none" onchange="importBlendData(this,'blend-A')">
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-group-title">Soil B gradation</div>
+        <div class="field"><span class="field-label">Particle size (mm), % passing</span>
+          <textarea class="field-input" id="blend-B" rows="7">4.75,72.3
+2.36,61.4
+1.18,51.7
+0.60,36.2
+0.30,26.5
+0.15,18.6
+0.075,11.2</textarea></div>
+        <div class="dl-bar" style="margin-top:8px">
+          <button class="btn bdl" onclick="document.getElementById('imp-blend-B').click()">Upload Soil B</button>
+          <input type="file" id="imp-blend-B" accept=".csv,.xlsx,.xls" style="display:none" onchange="importBlendData(this,'blend-B')">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><span class="field-label">Blend ratio — Soil A (%)</span>
+          <div class="rr">
+            <input type="range" id="blend-R" min="0" max="100" value="40" step="1" oninput="document.getElementById('blend-R-val').textContent=this.value+'%'"><div class="rv" id="blend-R-val">40%</div>
+          </div>
+        </div>
+        <div class="field"><span class="field-label">Optional LL / PL</span>
+          <div class="field-row" style="gap:6px">
+            <div class="field" style="margin-bottom:0"><input type="number" class="field-input" id="blend-LL" placeholder="LL (%)" step="0.1"></div>
+            <div class="field" style="margin-bottom:0"><input type="number" class="field-input" id="blend-PL" placeholder="PL (%)" step="0.1"></div>
+          </div>
+          <div class="field-hint">Optional for blended USCS classification</div>
+        </div>
+      </div>
+      <button class="btn bp" onclick="runBlend()">Blend soils</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Blended soil analysis</span></div>
+      <div class="cw" style="height:240px"><canvas id="blendC" role="img" aria-label="Blended soil gradation curve"></canvas></div>
+      <div class="dl-bar">
+        <button class="btn bdl" onclick="dlC('blendC','Blended_Soil',1)">PNG</button>
+        <button class="btn bdl" onclick="dlC('blendC','Blended_Soil',3)">~300dpi</button>
+        <button class="btn bdl" onclick="dlC('blendC','Blended_Soil',5)">~500dpi</button>
+        <button class="btn bxl" onclick="exportBlendExcel()">Download Excel</button>
+      </div>
+      <div class="div"></div>
+      <div class="g4">
+        <div class="mc"><div class="ml">D₁₀ (mm)</div><div class="mv" id="blend-D10">—</div></div>
+        <div class="mc"><div class="ml">D₃₀ (mm)</div><div class="mv" id="blend-D30">—</div></div>
+        <div class="mc"><div class="ml">D₆₀ (mm)</div><div class="mv" id="blend-D60">—</div></div>
+        <div class="mc"><div class="ml">Cᵤ</div><div class="mv" id="blend-CU">—</div></div>
+        <div class="mc"><div class="ml">C꜀</div><div class="mv" id="blend-CC">—</div></div>
+      </div>
+      <div id="blend-uscs-box" style="display:none;margin-top:10px;border-radius:9px;overflow:hidden">
+        <div style="background:var(--navy);color:#fff;padding:9px 13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.4px">Blended USCS</span>
+          <span id="blend-uscs-symbol" style="font-size:22px;font-weight:800;letter-spacing:1px;font-family:Georgia,serif"></span>
+        </div>
+        <div style="background:var(--acc-lt);border:0.5px solid var(--acc);border-top:none;padding:10px 13px">
+          <div id="blend-uscs-name" style="font-size:12px;font-weight:600;color:var(--acc-tx);margin-bottom:5px"></div>
+          <div id="blend-uscs-path" style="font-size:11px;color:var(--acc-tx);line-height:1.65"></div>
+          <div id="blend-uscs-params" style="font-size:10.5px;color:var(--acc-tx);margin-top:7px;padding-top:7px;border-top:0.5px solid rgba(29,158,117,0.3)"></div>
+        </div>
+      </div>
+      <div id="blend-ins" style="display:none" class="ins"><div class="ins-t">Blend interpretation</div><p id="blend-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PLASTICITY ══════════ -->
+<div class="panel" id="panel-plasticity">
+  <div style="margin-bottom:10px;font-size:12px;color:#333">For fine-grained soil (% passing 0.075mm &gt; 50%)</div>
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Atterberg limits</span></div>
+      <div class="field-group">
+        <div class="field-group-title">Limit values</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Liquid Limit (LL)</span><input type="number" class="field-input" id="LL" value="26.88" step="0.1"></div>
+          <div class="field"><span class="field-label">Plastic Limit (PL)</span><input type="number" class="field-input" id="PL" value="21.67" step="0.1"></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-group-title">Optional parameters</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Natural water content wₙ (%) — for LI</span><input type="number" class="field-input" id="WN" placeholder="e.g. 24" step="0.1"></div>
+          <div class="field"><span class="field-label">% clay content — for Activity index</span><input type="number" class="field-input" id="CLAYACT" placeholder="e.g. 1.94" step="0.1"></div>
+        </div>
+      </div>
+      <div class="g3" style="margin-top:4px">
+        <div class="mc"><div class="ml">PI</div><div class="mv" id="PI-out">—</div></div>
+        <div class="mc"><div class="ml">LI</div><div class="mv" id="LI-out">—</div><div class="ms" id="LI-st"></div></div>
+        <div class="mc"><div class="ml">Activity</div><div class="mv" id="ACT-out">—</div></div>
+      </div>
+      <button class="btn bp" onclick="runPlast()">Plot chart</button>
+      <div id="plast-ins" style="display:none;margin-top:8px" class="ins"><div class="ins-t">Classification</div><p id="plast-ins-txt"></p></div>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Casagrande plasticity chart</span></div>
+      <div class="cw" style="height:260px"><canvas id="plastC" role="img" aria-label="Casagrande chart">Plasticity chart</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('plastC','Plasticity',1)">PNG</button><button class="btn bdl" onclick="dlC('plastC','Plasticity',3)">~300dpi</button><button class="btn bdl" onclick="dlC('plastC','Plasticity',5)">~500dpi</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CBR ══════════ -->
+<div class="panel" id="panel-cbr">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">CBR penetration-load data</span></div>
+      <div class="field-group">
+        <div class="field-group-title">Standard loads</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Standard load @ 2.5 mm (kN)</span><input type="number" class="field-input" id="S25" value="13.24"></div>
+          <div class="field"><span class="field-label">Standard load @ 5.0 mm (kN)</span><input type="number" class="field-input" id="S50" value="19.96"></div>
+        </div>
+      </div>
+      <div class="field"><span class="field-label">Penetration (mm), Load (kN)</span><textarea class="field-input" id="cbrD" rows="11">0,0
+0.5,0.53
+1.0,1.05
+1.5,1.57
+2.0,2.09
+2.5,2.60
+3.0,3.05
+4.0,3.82
+5.0,4.47
+7.5,5.93
+10.0,7.14
+12.5,8.08</textarea></div>
+      <button class="btn bp" onclick="runCBR()">Compute CBR</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Load-penetration curve</span></div>
+      <div class="cw" style="height:200px"><canvas id="cbrC" role="img" aria-label="CBR curve">CBR</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('cbrC','CBR',1)">PNG</button><button class="btn bdl" onclick="dlC('cbrC','CBR',3)">~300dpi</button><button class="btn bdl" onclick="dlC('cbrC','CBR',5)">~500dpi</button></div>
+      <div class="div"></div>
+      <div class="g3"><div class="mc"><div class="ml">CBR @ 2.5mm</div><div class="mv" id="CBR25">—</div></div><div class="mc"><div class="ml">CBR @ 5.0mm</div><div class="mv" id="CBR50">—</div></div><div class="mc"><div class="ml">Governing</div><div class="mv" id="CBRGOV">—</div></div></div>
+      <div id="cbr-ins" style="display:none" class="ins"><div class="ins-t">Pavement suitability</div><p id="cbr-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ COMPACTION ══════════ -->
+<div class="panel" id="panel-compaction">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Proctor compaction</span></div>
+      <div class="field-group">
+        <div class="field-group-title">Sample properties</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Specific gravity Gs</span><input type="number" class="field-input" id="GS" value="2.68" step="0.01"></div>
+          <div class="field"><span class="field-label">Test type</span><select class="field-input" id="compType"><option>Standard Proctor (BS 1377)</option><option>Modified Proctor</option></select></div>
+        </div>
+      </div>
+      <div class="field"><span class="field-label">Water content (%), dry density (kN/m³)</span><textarea class="field-input" id="compD" rows="7">8,15.8
+10,16.9
+12,18.1
+14,19.0
+16,18.5
+18,17.6
+20,16.8</textarea></div>
+      <button class="btn bp" onclick="runComp()">Plot curve</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Compaction curve + ZAV line</span></div>
+      <div class="cw" style="height:215px"><canvas id="compC" role="img" aria-label="Proctor compaction curve">Compaction</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('compC','Compaction',1)">PNG</button><button class="btn bdl" onclick="dlC('compC','Compaction',3)">~300dpi</button><button class="btn bdl" onclick="dlC('compC','Compaction',5)">~500dpi</button></div>
+      <div class="div"></div>
+      <div class="g3"><div class="mc"><div class="ml">OMC (%)</div><div class="mv" id="OMC">—</div></div><div class="mc"><div class="ml">MDD (kN/m³)</div><div class="mv" id="MDD">—</div></div><div class="mc"><div class="ml">Sr at OMC</div><div class="mv" id="SR">—</div></div></div>
+      <div id="comp-ins" style="display:none" class="ins"><div class="ins-t">Compaction assessment</div><p id="comp-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONSOLIDATION ══════════ -->
+<div class="panel" id="panel-consolidation">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Oedometer test data</span></div>
+      <div class="field"><span class="field-label">Effective stress (kPa), void ratio</span><textarea class="field-input" id="consolD" rows="8">10,1.120
+25,1.095
+50,1.068
+100,1.035
+200,0.992
+400,0.948
+800,0.892
+1600,0.831</textarea></div>
+      <div class="field-group" style="margin-top:8px">
+        <div class="field-group-title">Stress state</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Preconsolidation σ'c (kPa)</span><input type="number" class="field-input" id="PC" value="100"></div>
+          <div class="field"><span class="field-label">Layer thickness H (m)</span><input type="number" class="field-input" id="HL" value="5" step="0.1"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Initial void ratio e₀</span><input type="number" class="field-input" id="E0" value="1.120" step="0.001"></div>
+          <div class="field"><span class="field-label">Initial stress σ'v0 (kPa)</span><input type="number" class="field-input" id="SV0" value="50"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Stress increment Δσ (kPa)</span><input type="number" class="field-input" id="DS" value="80"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Coefficient of consolidation cᵥ</span><input type="number" class="field-input" id="CV" value="2.5" step="0.01"></div>
+          <div class="field"><span class="field-label">cᵥ units</span><select class="field-input" id="CVU"><option value="m2y">m²/year</option><option value="mm2min">mm²/min</option></select></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Drainage condition</span><select class="field-input" id="DR"><option value="double">Double drainage</option><option value="single">Single drainage</option></select></div>
+          <div class="field"><span class="field-label">Select U%</span><select class="field-input" id="DU"><option value="50">50%</option><option value="90">90%</option><option value="95">95%</option></select></div>
+        </div>
+      </div>
+      <button class="btn bp" onclick="runConsol()">Analyse</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">e–log σ′ curve</span></div>
+      <div class="cw" style="height:200px"><canvas id="consolC" role="img" aria-label="Consolidation curve">Consolidation</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('consolC','Consolidation',1)">PNG</button><button class="btn bdl" onclick="dlC('consolC','Consolidation',3)">~300dpi</button><button class="btn bdl" onclick="dlC('consolC','Consolidation',5)">~500dpi</button></div>
+      <div class="div"></div>
+      <div class="g4"><div class="mc"><div class="ml">Cc</div><div class="mv" id="CC-con">—</div></div><div class="mc"><div class="ml">Cs</div><div class="mv" id="CS-con">—</div></div><div class="mc"><div class="ml">OCR</div><div class="mv" id="OCR">—</div></div><div class="mc"><div class="ml">Settlement (mm)</div><div class="mv" id="SETT">—</div></div></div>
+      <div class="g4"><div class="mc"><div class="ml">d (m)</div><div class="mv" id="DRAIN">—</div></div><div class="mc"><div class="ml">t₅₀</div><div class="mv" id="T50">—</div></div><div class="mc"><div class="ml">t₉₀</div><div class="mv" id="T90">—</div></div><div class="mc"><div class="ml">tᵤ</div><div class="mv" id="TU">—</div></div></div>
+      <div id="consol-ins" style="display:none" class="ins"><div class="ins-t">Consolidation state</div><p id="consol-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BEARING ══════════ -->
+<div class="panel" id="panel-bearing">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">General Bearing Capacity Analysis (Vesic N Factors)</span></div>
+      <div style="margin-top:4px;font-size:11px;color:#555">This module utilizes the General Bearing Capacity Equation with N factors according to Vesic (1973) and shape factors according to Terzaghi.</div>
+      <div class="field-group"><div class="field-group-title">Soil parameters</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Cohesion c (kPa)</span><input type="number" class="field-input" id="BC-c" value="15"></div>
+          <div class="field"><span class="field-label">Friction angle φ (°)</span><input type="number" class="field-input" id="BC-phi" value="25"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Unit weight γ (kN/m³)</span><input type="number" class="field-input" id="BC-gam" value="18" step="0.1"></div>
+          <div class="field"><span class="field-label">Factor of safety</span><input type="number" class="field-input" id="BC-FS" value="3" step="0.5"></div>
+        </div>
+      </div>
+      <div class="field-group"><div class="field-group-title">Foundation geometry</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Depth Df (m)</span><input type="number" class="field-input" id="BC-Df" value="1.5" step="0.1"></div>
+          <div class="field"><span class="field-label">Width B (m)</span><input type="number" class="field-input" id="BC-B" value="2.0" step="0.1"></div>
+        </div>
+        <div class="field"><span class="field-label">Shape</span><select class="field-input" id="BC-shape"><option value="strip">Strip</option><option value="square" selected>Square</option><option value="circle">Circular</option></select></div>
+      </div>
+      <button class="btn bp" onclick="runBearing()">Compute</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">qₐ vs friction angle</span></div>
+      <div class="cw" style="height:185px"><canvas id="bearC" role="img" aria-label="Bearing capacity chart">Bearing</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('bearC','Bearing',1)">PNG</button><button class="btn bdl" onclick="dlC('bearC','Bearing',3)">~300dpi</button><button class="btn bdl" onclick="dlC('bearC','Bearing',5)">~500dpi</button></div>
+      <div class="div"></div>
+      <div class="g3"><div class="mc"><div class="ml">qᵤ (kPa)</div><div class="mv" id="QU">—</div></div><div class="mc"><div class="ml">qₐ (kPa)</div><div class="mv" id="QA">—</div></div><div class="mc"><div class="ml">Nᶜ/Nq/Nᵧ</div><div class="mv" id="NF">—</div></div></div>
+      <div id="bear-ins" style="display:none" class="ins"><div class="ins-t">Foundation recommendation</div><p id="bear-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PET ══════════ -->
+<div class="panel" id="panel-pet">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Penman Combination Method (Interpolated Energy-Aerodynamic Model)</span></div>
+      <div class="imp-z" onclick="document.getElementById('imp-pet').click()">Import monthly climate data (Excel/CSV)<input type="file" id="imp-pet" accept=".csv,.xlsx,.xls" style="display:none" onchange="importPET(this)"></div>
+      <div class="field-group"><div class="field-group-title">Site parameters</div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Latitude (°N)</span><input type="number" class="field-input" id="LAT" value="27.7" step="0.1"></div>
+          <div class="field"><span class="field-label">Elevation (m)</span><input type="number" class="field-input" id="ELEV" value="1300"></div>
+        </div>
+      </div>
+      <div class="field"><span class="field-label">Monthly data (12 rows): Temp°C, RH%, Wind m/s, Sun hrs</span><textarea class="field-input" id="petD" rows="12">19.6,68,1.5,6.4
+21.8,58,1.8,7.5
+25.2,52,2.1,8.1
+28.4,44,2.4,8.6
+29.8,42,2.2,9.0
+28.3,66,1.8,6.2
+26.7,79,1.5,4.8
+26.4,80,1.4,4.9
+26.3,77,1.5,5.7
+25.1,68,1.4,6.9
+21.9,63,1.4,7.5
+19.4,67,1.4,6.8</textarea></div>
+      <button class="btn bp" onclick="runPET()">Calculate PET</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Monthly PET</span></div>
+      <div class="cw" style="height:180px"><canvas id="petC" role="img" aria-label="Monthly PET">PET</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('petC','Monthly_PET',1)">PNG</button><button class="btn bdl" onclick="dlC('petC','Monthly_PET',3)">~300dpi</button><button class="btn bdl" onclick="dlC('petC','Monthly_PET',5)">~500dpi</button><button class="btn bxl" onclick="exportPETExcel()">Excel</button></div>
+      <div class="div"></div>
+      <div class="g3"><div class="mc"><div class="ml">Annual PET</div><div class="mv" id="PET-ann">—</div><div class="ms">mm/yr</div></div><div class="mc"><div class="ml">Peak month</div><div class="mv" id="PET-pk">—</div></div><div class="mc"><div class="ml">Min month</div><div class="mv" id="PET-mn">—</div></div></div>
+      <div id="pet-tbl" style="display:none;margin-top:8px;overflow-x:auto"><table class="tbl"><thead><tr><th>Month</th><th>T°C</th><th>RH%</th><th>Wind</th><th>Sun</th><th>PET(mm)</th></tr></thead><tbody id="pet-tb"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ RUNOFF ══════════ -->
+<div class="panel" id="panel-runoff">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">SCS-CN runoff</span></div>
+      <div class="field-group"><div class="field-group-title">Parameters</div>
+        <div class="field"><span class="field-label">Curve Number (CN): <strong id="cn-v">75</strong></span><input type="range" id="CN" min="30" max="100" value="75" step="1" oninput="document.getElementById('cn-v').textContent=this.value"></div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Rainfall P (mm)</span><input type="number" class="field-input" id="RP" value="80"></div>
+          <div class="field"><span class="field-label">Catchment area (km²)</span><input type="number" class="field-input" id="CA" value="5.5" step="0.1"></div>
+        </div>
+        <div class="field"><span class="field-label">AMC condition</span><select class="field-input" id="AMC"><option value="1">AMC I — Dry</option><option value="2" selected>AMC II — Average</option><option value="3">AMC III — Wet</option></select></div>
+      </div>
+      <button class="btn bp" onclick="runRunoff()">Compute</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Rainfall-runoff curve</span></div>
+      <div class="cw" style="height:200px"><canvas id="runC" role="img" aria-label="SCS runoff curve">Runoff</canvas></div>
+      <div class="dl-bar"><button class="btn bdl" onclick="dlC('runC','SCS_Runoff',1)">PNG</button><button class="btn bdl" onclick="dlC('runC','SCS_Runoff',3)">~300dpi</button><button class="btn bdl" onclick="dlC('runC','SCS_Runoff',5)">~500dpi</button></div>
+      <div class="div"></div>
+      <div class="g3"><div class="mc"><div class="ml">Q (mm)</div><div class="mv" id="RQ">—</div></div><div class="mc"><div class="ml">Volume (m³)</div><div class="mv" id="RV">—</div></div><div class="mc"><div class="ml">Runoff ratio</div><div class="mv" id="RR">—</div></div></div>
+      <div id="run-ins" style="display:none" class="ins"><div class="ins-t">Assessment</div><p id="run-ins-txt"></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ GANTT ══════════ -->
+<div class="panel" id="panel-gantt">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Research tasks</span></div>
+      <div class="field-group"><div class="field-group-title">Project</div>
+        <div class="field"><span class="field-label">Project title</span><input type="text" class="field-input" id="G-title" value="Geotechnical Research Programme"></div>
+        <div class="field-row"><div class="field"><span class="field-label">Total weeks</span><input type="number" class="field-input" id="G-wk" value="18"></div><div class="field"><span class="field-label">Prepared by</span><input type="text" class="field-input" id="G-by" value="Research Team"></div></div>
+      </div>
+      <div class="field"><span class="field-label">Tasks: name, start week, duration (weeks)</span><textarea class="field-input" id="G-data" rows="9">Literature review,1,3
+Site reconnaissance,2,2
+Soil sampling,4,2
+Laboratory testing,5,5
+Data analysis,9,3
+Interpretation,11,2
+Report writing,12,4
+Submission,16,1</textarea></div>
+      <button class="btn bp" onclick="runGantt()">Generate</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct" id="gantt-hl">Gantt chart</span></div>
+      <div id="gantt-out"></div>
+      <div class="dl-bar" style="margin-top:8px"><button class="btn bdl" onclick="dlGantt(1)">PNG</button><button class="btn bdl" onclick="dlGantt(3)">~300dpi</button><button class="btn bdl" onclick="dlGantt(5)">~500dpi</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SETTINGS ══════════ -->
+<div class="panel" id="panel-settings">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Project metadata</span></div>
+      <div class="field-group"><div class="field-group-title">Identification</div>
+        <div class="field"><span class="field-label">Project name</span><input type="text" class="field-input" id="proj-name" value="Sample Analysis" oninput="document.getElementById('proj-disp').textContent='Project: '+this.value"></div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Reference number</span><input type="text" class="field-input" id="proj-ref" value="GYN-2025-001"></div>
+          <div class="field"><span class="field-label">Date</span><input type="text" class="field-input" id="proj-date" value="April 2026"></div>
+        </div>
+        <div class="field"><span class="field-label">Site location</span><input type="text" class="field-input" id="proj-loc" value="Kathmandu Valley, Nepal"></div>
+        <div class="field-row">
+          <div class="field"><span class="field-label">Prepared by</span><input type="text" class="field-input" id="proj-by" value="GeoYantra User"></div>
+          <div class="field"><span class="field-label">Checked by</span><input type="text" class="field-input" id="proj-chk" value=""></div>
+        </div>
+        <div class="field"><span class="field-label">Organisation</span><input type="text" class="field-input" id="proj-org" value=""></div>
+        <div class="field"><span class="field-label">Watermark text (optional)</span><input type="text" class="field-input" id="proj-wm" placeholder="e.g. CONFIDENTIAL or DRAFT"><div class="field-hint">Applied to all exported charts and PDF report</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Chart appearance</span></div>
+      <div class="field-group"><div class="field-group-title">Style</div>
+        <div class="field"><span class="field-label">Color scheme</span><select class="field-input" id="chart-scheme"><option value="professional">Professional (navy / green)</option><option value="journal">Journal (black / grey)</option><option value="vibrant">Vibrant (blue / orange)</option><option value="mono">Monochrome</option></select></div>
+        <div class="field"><span class="field-label">Display theme</span><select class="field-input" id="ui-theme"><option value="light">Light</option><option value="dark">Dark</option></select></div>
+        <div class="field"><span class="field-label">Export background</span><select class="field-input" id="chart-bg"><option value="white">White (report-ready)</option><option value="cream">Warm white (#FAFAF8)</option></select></div>
+      </div>
+      <div class="field-group"><div class="field-group-title">Data point style — primary series</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px" id="pt-s1">
+          <div class="pill pg" style="cursor:pointer;border:1px solid var(--acc)" onclick="setPt1('circle',this)">Circle</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt1('triangle',this)">Triangle</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt1('rect',this)">Square</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt1('star',this)">Star</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt1('cross',this)">Cross</div>
+        </div>
+        <div class="field"><span class="field-label">Point radius (px)</span><div class="rr"><input type="range" id="pt-size" min="2" max="14" value="5" step="1" oninput="ptSV.textContent=this.value"><div class="rv" id="ptSV">5</div></div></div>
+      </div>
+      <div class="field-group"><div class="field-group-title">Secondary series point style</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px" id="pt-s2">
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt2('circle',this)">Circle</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt2('triangle',this)">Triangle</div>
+          <div class="pill pg" style="cursor:pointer;border:1px solid var(--acc)" onclick="setPt2('rect',this)">Square</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt2('star',this)">Star</div>
+          <div class="pill" style="cursor:pointer;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary)" onclick="setPt2('cross',this)">Cross</div>
+        </div>
+      </div>
+      <div class="field-group"><div class="field-group-title">Weights</div>
+        <div class="field"><span class="field-label">Line weight (px)</span><div class="rr"><input type="range" id="line-wt" min="1" max="4" value="2" step="0.5" oninput="lwV.textContent=this.value"><div class="rv" id="lwV">2</div></div></div>
+        <div class="field"><span class="field-label">Axis label font (px)</span><div class="rr"><input type="range" id="ax-font" min="8" max="14" value="10" step="1" oninput="afV.textContent=this.value+'px'"><div class="rv" id="afV">10px</div></div></div>
+      </div>
+      <button class="btn bp" onclick="refreshAll()">Apply to all charts</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PDF EXPORT ══════════ -->
+<div class="panel" id="panel-pdfexport">
+  <div class="g2">
+    <div class="card">
+      <div class="chd"><span class="ct">Select tests for PDF report</span></div>
+      <div class="note-box" style="margin-bottom:10px"><p>Run analyses first to enable tests. Select which sections to include in the lab report PDF.</p></div>
+      <div id="pdf-checklist"></div>
+      <div class="div"></div>
+      <div class="field-group"><div class="field-group-title">Report configuration</div>
+        <div class="field"><span class="field-label">Report title</span><input type="text" class="field-input" id="pdf-report-title" value="Geotechnical Laboratory Investigation Report"></div>
+        <div class="field"><span class="field-label">Subtitle</span><input type="text" class="field-input" id="pdf-subtitle" value="Soil Characterisation Tests"></div>
+        <div class="field"><span class="field-label">Referenced standard</span><input type="text" class="field-input" id="pdf-std" value="BS 1377 / ASTM D 422 / AASHTO"></div>
+      </div>
+      <button class="btn bp" style="background:#8B1A1A;border-color:#8B1A1A" onclick="genPDF()">Generate &amp; download PDF report</button>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ct">Report preview</span></div>
+      <div style="background:var(--color-background-secondary);border-radius:8px;padding:12px;font-family:Georgia,serif;border:0.5px solid var(--color-border-tertiary)">
+        <div style="font-size:13px;font-weight:bold;color:var(--navy);margin-bottom:3px" id="prev-title">Geotechnical Laboratory Investigation Report</div>
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:8px" id="prev-meta">Project: — | Date: —</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.6" id="prev-content">Select and run tests to preview.</div>
+      </div>
+      <div class="div"></div>
+      <div class="note-box"><p>The generated PDF will open in a new tab for printing. Use your browser's <strong>Save as PDF</strong> option. Includes: cover page, project metadata, result tables, embedded charts, engineering interpretations, and risk summary.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ AI REPORT ══════════ -->
+<div class="panel" id="panel-interpretation">
+  <div class="card">
+    <div class="chd"><span class="ct">AI engineering interpretation</span><span class="pill pp">Claude API</span></div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">
+      <button class="btn bai" onclick="genAI()">Generate AI report</button>
+      <button class="btn bdl" onclick="dlTxt()">Download TXT</button>
+      <button class="btn bxl" onclick="dlCSV()">Export CSV</button>
+    </div>
+    <div id="ai-status" style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px">Run analyses first, then generate report.</div>
+    <div class="ai-out" id="ai-out">AI-generated engineering report will appear here...</div>
+    <div class="div"></div>
+    <div id="risk-panel" style="display:none"><div class="ct" style="margin-bottom:7px">Risk profile</div><div id="risk-rows"></div></div>
+  </div>
+</div>
+
+<!-- ══════════ DEVELOPER ══════════ -->
+<div class="panel" id="panel-developer">
+  <div class="card">
+    <div class="chd"><span class="ct">Meet the Developer</span></div>
+    <p class="developer-note">Built with care for practical geotechnical workflows. Connect directly through the links below.</p>
+    <div class="developer-card">
+      <div class="developer-copy">
+        <span class="developer-eyebrow">Crafted by</span>
+        <span class="developer-name"><strong>Arjun Adhikari</strong></span>
+      </div>
+      <div class="social-links">
+        <a class="social-link" href="https://arjunadhikari10.com.np" target="_blank" rel="noreferrer" aria-label="Website" title="Website">
+          <svg class="icon-web" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="currentColor" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855q-.215.403-.395.872c.705.157 1.472.257 2.282.287zM4.249 3.539q.214-.577.481-1.078a7 7 0 0 1 .597-.933A7 7 0 0 0 3.051 3.05q.544.277 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9 9 0 0 1-1.565-.667A6.96 6.96 0 0 0 1.018 7.5zm1.4-2.741a12.3 12.3 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332M8.5 5.09V7.5h2.99a12.3 12.3 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.6 13.6 0 0 1 7.5 10.91V8.5zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741zm-3.282 3.696q.18.469.395.872c.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a7 7 0 0 1-.598-.933 9 9 0 0 1-.481-1.079 8.4 8.4 0 0 0-1.198.49 7 7 0 0 0 2.276 1.522zm-1.383-2.964A13.4 13.4 0 0 1 3.508 8.5h-2.49a6.96 6.96 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667m6.728 2.964a7 7 0 0 0 2.275-1.521 8.4 8.4 0 0 0-1.197-.49 9 9 0 0 1-.481 1.078 7 7 0 0 1-.597.933M8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855q.216-.403.395-.872A12.6 12.6 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.96 6.96 0 0 0 14.982 8.5h-2.49a13.4 13.4 0 0 1-.437 3.008M14.982 7.5a6.96 6.96 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008zM11.27 2.461q.266.502.482 1.078a8.4 8.4 0 0 0 1.196-.49 7 7 0 0 0-2.275-1.52c.218.283.418.597.597.932m-.488 1.343a8 8 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://github.com/arjunadhikari10" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+          <svg class="icon-github" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://www.facebook.com/geneius.b.arjun" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook">
+          <svg class="icon-facebook" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/arjunadhikari_10/" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram">
+          <svg class="icon-instagram" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/arjunadhikari10/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+          <svg class="icon-linkedin" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const GC=['#1a3a2a','#185FA5','#8B1A1A','#5B3A8B','#7A4A00','#0F6E56','#2C5F2E','#888780'];
+let charts={},results={},gView='combined',ptStyle1='circle',ptStyle2='rect';
+
+const CT_TABLE={15:-1.1,16:-0.9,17:-0.7,18:-0.5,19:-0.3,20:0,21:0.2,22:0.4,23:0.7,24:1.0,25:1.3,26:1.65,27:2.0,28:2.5,29:3.05,30:3.8};
+function getCt(T){
+  const keys=Object.keys(CT_TABLE).map(Number).sort((a,b)=>a-b);
+  if(T<=keys[0])return CT_TABLE[keys[0]];
+  if(T>=keys[keys.length-1])return CT_TABLE[keys[keys.length-1]];
+  for(let i=0;i<keys.length-1;i++){if(T>=keys[i]&&T<=keys[i+1]){const f=(T-keys[i])/(keys[i+1]-keys[i]);return CT_TABLE[keys[i]]+f*(CT_TABLE[keys[i+1]]-CT_TABLE[keys[i]]);}}
+  return 0;
+}
+const K_TABLE={2.60:0.01530,2.65:0.01505,2.70:0.01481,2.75:0.01457,2.80:0.01435};
+function getK(Gs,T){
+  const baseT=25;
+  const gsKeys=Object.keys(K_TABLE).map(Number).sort((a,b)=>a-b);
+  let k=K_TABLE[2.70];
+  for(let i=0;i<gsKeys.length-1;i++){if(Gs>=gsKeys[i]&&Gs<=gsKeys[i+1]){const f=(Gs-gsKeys[i])/(gsKeys[i+1]-gsKeys[i]);k=K_TABLE[gsKeys[i]]+f*(K_TABLE[gsKeys[i+1]]-K_TABLE[gsKeys[i]]);break;}}
+  const tempFactor=Math.sqrt(0.8905/0.8937*((T+273)/(baseT+273)));
+  return k*tempFactor;
+}
+
+function toggleTheory(id){
+  const el=document.getElementById(id);el.classList.toggle('open');
+}
+
+function show(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('on');
+  el.classList.add('active');
+  const nav=document.querySelector('.nav');
+  const navBtn=document.getElementById('mobile-nav-toggle');
+  if(window.innerWidth<=700 && nav && nav.classList.contains('open')){
+    nav.classList.remove('open');
+    if(navBtn){navBtn.textContent='☰';navBtn.setAttribute('aria-expanded','false');}
+  }
+  if(id==='pdfexport'){buildChecklist();updatePreview();}
+}
+function toggleMobileNav(){
+  const nav=document.querySelector('.nav');
+  const btn=document.getElementById('mobile-nav-toggle');
+  if(!nav||!btn) return;
+  const open = !nav.classList.contains('open');
+  nav.classList.toggle('open', open);
+  btn.textContent = open ? '✕' : '☰';
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function setGV(v,el){
+  gView=v;
+  document.querySelectorAll('#gvt .pill').forEach(t=>{t.style.background='var(--color-background-secondary)';t.style.color='var(--color-text-secondary)';t.style.border='1px solid var(--color-border-secondary)';});
+  el.style.background='var(--acc-lt)';el.style.color='var(--acc-tx)';el.style.border='1px solid var(--acc)';
+}
+function setPt1(v,el){ptStyle1=v;document.querySelectorAll('#pt-s1 .pill').forEach(t=>{t.style.background='var(--color-background-secondary)';t.style.color='var(--color-text-secondary)';t.style.border='1px solid var(--color-border-secondary)';});el.style.background='var(--acc-lt)';el.style.color='var(--acc-tx)';el.style.border='1px solid var(--acc)';}
+function setPt2(v,el){ptStyle2=v;document.querySelectorAll('#pt-s2 .pill').forEach(t=>{t.style.background='var(--color-background-secondary)';t.style.color='var(--color-text-secondary)';t.style.border='1px solid var(--color-border-secondary)';});el.style.background='var(--acc-lt)';el.style.color='var(--acc-tx)';el.style.border='1px solid var(--acc)';}
+function pCSV(txt){return txt.trim().split('\n').map(l=>l.trim().split(',').map(v=>parseFloat(v.trim()))).filter(r=>r.length>=2&&!isNaN(r[0])&&!isNaN(r[1]));}
+function lerp(x,y,xi){if(!x.length)return 0;if(xi<=x[0])return y[0];if(xi>=x[x.length-1])return y[y.length-1];for(let i=0;i<x.length-1;i++)if(xi>=x[i]&&xi<=x[i+1])return y[i]+(xi-x[i])/(x[i+1]-x[i])*(y[i+1]-y[i]);return y[y.length-1];}
+function logI(sz,p,t){const pairs=[...sz.map((s,i)=>({l:Math.log10(s),p:p[i]}))].sort((a,b)=>a.p-b.p);return Math.pow(10,lerp(pairs.map(d=>d.p),pairs.map(d=>d.l),t));}
+function dC(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function getMeta(){return{name:document.getElementById('proj-name').value||'Sample',ref:document.getElementById('proj-ref').value||'',date:document.getElementById('proj-date').value||'',by:document.getElementById('proj-by').value||'',chk:document.getElementById('proj-chk').value||'',loc:document.getElementById('proj-loc').value||'',org:document.getElementById('proj-org').value||'',wm:document.getElementById('proj-wm').value||''};}
+function getS(){
+  const sc=document.getElementById('chart-scheme').value;
+  const cols={professional:{p:'#1a3a2a',s:'#185FA5',a:'#8B1A1A',t:'#5B3A8B',fill:'rgba(26,58,42,0.09)',fill2:'rgba(24,95,165,0.09)',grid:'#e8e8e8'},journal:{p:'#111',s:'#555',a:'#333',t:'#777',fill:'rgba(0,0,0,0.07)',fill2:'rgba(0,0,0,0.04)',grid:'#ddd'},vibrant:{p:'#1565C0',s:'#E65100',a:'#2E7D32',t:'#6A1B9A',fill:'rgba(21,101,192,0.1)',fill2:'rgba(230,81,0,0.08)',grid:'#e0e0e0'},mono:{p:'#1a1a1a',s:'#555',a:'#888',t:'#333',fill:'rgba(0,0,0,0.06)',fill2:'rgba(0,0,0,0.03)',grid:'#ddd'}};
+  return{col:cols[sc]||cols.professional,pt:parseFloat(document.getElementById('pt-size').value)||5,ptS:ptStyle1,pt2:ptStyle2,lw:parseFloat(document.getElementById('line-wt').value)||2,af:parseInt(document.getElementById('ax-font').value)||10};
+}
+function pO(s){return{responsive:true,maintainAspectRatio:false,animation:{duration:450},layout:{padding:{top:6,right:10,bottom:2,left:2}},plugins:{legend:{labels:{font:{size:s.af,family:'Georgia,serif'},boxWidth:10,padding:9}}}};}
+function aX(s,xt,yt,extra={}){const f={size:s.af,family:'Georgia,serif'};return{x:{title:{display:true,text:xt,font:f,color:'#444'},grid:{color:s.col.grid},ticks:{font:f,color:'#555'},...(extra.x||{})},y:{title:{display:true,text:yt,font:f,color:'#444'},grid:{color:s.col.grid},ticks:{font:f,color:'#555'},...(extra.y||{})}};}
+
+function dlC(cid,fname,scale){
+  const cv=document.getElementById(cid);if(!cv||!cv.width)return;
+  const m=getMeta(),fh=58;const bgc=document.getElementById('chart-bg').value==='cream'?'#FAFAF8':'#fff';
+  const off=document.createElement('canvas');off.width=cv.width*scale;off.height=(cv.height+fh)*scale;
+  const ctx=off.getContext('2d');ctx.scale(scale,scale);
+  ctx.fillStyle=bgc;ctx.fillRect(0,0,cv.width,cv.height+fh);ctx.drawImage(cv,0,0);
+  ctx.fillStyle='#f2f2f2';ctx.fillRect(0,cv.height,cv.width,fh);
+  ctx.strokeStyle='#d0d0d0';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(0,cv.height+0.5);ctx.lineTo(cv.width,cv.height+0.5);ctx.stroke();
+  ctx.fillStyle='#1a3a2a';ctx.font='bold 9px Georgia,serif';ctx.fillText(m.name+(m.ref?' | '+m.ref:''),10,cv.height+14);
+  ctx.fillStyle='#555';ctx.font='8px Georgia,serif';ctx.fillText('By: '+m.by+'  |  '+m.date+'  |  GeoYantra Pro',10,cv.height+26);
+  ctx.fillStyle='#aaa';ctx.font='7px Georgia,serif';ctx.textAlign='right';ctx.fillText(scale===1?'Screen':scale===3?'~300dpi':'~500dpi',cv.width-6,cv.height+48);ctx.textAlign='left';
+  if(m.wm){ctx.save();ctx.globalAlpha=0.07;ctx.font='bold '+(cv.width/8)+'px Georgia,serif';ctx.fillStyle='#000';ctx.translate(cv.width/2,cv.height/2);ctx.rotate(-0.28);ctx.textAlign='center';ctx.fillText(m.wm,0,0);ctx.restore();}
+  const sfx=scale===1?'':scale===3?'_300dpi':'_500dpi';
+  const a=document.createElement('a');a.download=fname+sfx+'_GeoYantra.png';a.href=off.toDataURL('image/png',1);a.click();
+}
+
+/* ══════ HYDROMETER ANALYSIS ══════ */
+function runHydrometer(){
+  const Gs=parseFloat(document.getElementById('hy-Gs').value)||2.68;
+  const W=parseFloat(document.getElementById('hy-W').value)||50;
+  const T=parseFloat(document.getElementById('hy-T').value)||25;
+  const Zc=parseFloat(document.getElementById('hy-Zc').value)||0;
+  const Cm=parseFloat(document.getElementById('hy-Cm').value)||0.5;
+  const P75=parseFloat(document.getElementById('hy-P75').value)||100;
+  const Ct=getCt(T);
+  const K=getK(Gs,T);
+  document.getElementById('hy-ct').textContent=Ct.toFixed(2);
+  document.getElementById('hydro-metrics').style.display='grid';
+  const rows=pCSV(document.getElementById('hy-data').value);
+  if(!rows.length){alert('Enter hydrometer readings.');return;}
+  const tableRows=[];
+  const hydroPts=[],adjPts=[];
+  rows.forEach(row=>{
+    const t=row[0];let raw=row[1];
+    let R=raw>1 && raw<2 ?(raw-1)*1000:raw;
+    const Rm=R+Cm;
+    const Rc=Rm+Ct-Zc;
+    const L=16.295-0.2645*Rm;
+    const D=L>0&&t>0?K*Math.sqrt(L/t):0;
+    const P=Math.max(0,(Rc/W)*(Gs/(Gs-1))*100);
+    const Pa=P*(P75/100);
+    tableRows.push({t,R:R.toFixed(1),Rm:Rm.toFixed(1),Rc:Rc.toFixed(2),L:L.toFixed(3),D:D.toFixed(5),P:P.toFixed(2),Pa:Pa.toFixed(2)});
+    if(D>0&&D<0.075){hydroPts.push({x:D,y:P});adjPts.push({x:D,y:Pa});}
+  });
+  document.getElementById('hy-tbody').innerHTML=tableRows.map(r=>`<tr><td>${r.t}</td><td>${r.R}</td><td>${r.Rm}</td><td>${r.Rc}</td><td>${r.L}</td><td>${r.D}</td><td>${r.P}</td><td>${r.Pa}</td></tr>`).join('');
+  document.getElementById('hy-tbl-wrap').style.display='block';
+  const clays=adjPts.filter(p=>p.x<0.002);
+  const silts=adjPts.filter(p=>p.x>=0.002&&p.x<0.075);
+  const claypct=clays.length?clays[clays.length-1].y.toFixed(1):'—';
+  const siltpct=silts.length?(silts[0].y-clays[clays.length-1].y).toFixed(1):'—';
+  const d50pts=adjPts;let d50='—';
+  if(d50pts.length>=2){for(let i=0;i<d50pts.length-1;i++){if(d50pts[i].y>=50&&d50pts[i+1].y<=50){const f=(50-d50pts[i].y)/(d50pts[i+1].y-d50pts[i].y);d50=(d50pts[i].x+f*(d50pts[i+1].x-d50pts[i].x)).toFixed(5);break;}if(d50pts[i].y<=50&&d50pts[i+1].y>=50){const f=(50-d50pts[i].y)/(d50pts[i+1].y-d50pts[i].y);d50=(d50pts[i].x+f*(d50pts[i+1].x-d50pts[i].x)).toFixed(5);break;}}}
+  document.getElementById('hy-clay').textContent=claypct+'%';
+  document.getElementById('hy-silt').textContent=siltpct==='—'?'—':siltpct+'%';
+  document.getElementById('hy-d50').textContent=d50;
+  document.getElementById('hy-push-note').style.display='block';
+  document.getElementById('hy-push-txt').textContent=`Adjusted % finer uses P₇₅ = ${P75.toFixed(3)}%. You can copy the adjusted Pa column into the Gradation module, or use Transfer D & Pa to Gradation to populate it automatically.`;
+  results.hydrometer={Gs,W,T,Ct:Ct.toFixed(2),K:K.toFixed(5),Zc,Cm,P75,tableRows,hydroPts,adjPts,claypct,siltpct,d50};
+  dC('hydroC');const s=getS();
+  const ds=[
+    {label:'% finer P (raw)',data:hydroPts,borderColor:s.col.s,backgroundColor:'transparent',pointRadius:s.pt,pointStyle:s.ptS,showLine:true,tension:0.2,fill:false,borderWidth:s.lw,borderDash:[4,2]},
+    {label:'Adjusted % finer Pa',data:adjPts,borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.pt2,showLine:true,tension:0.2,fill:false,borderWidth:s.lw}
+  ];
+  const ax=aX(s,'Particle size, D (mm)','% Finer',{x:{type:'logarithmic',reverse:true},y:{min:0,max:100}});
+  charts.hydroC=new Chart(document.getElementById('hydroC').getContext('2d'),{type:'scatter',data:{datasets:ds},options:{...pO(s),scales:ax}});
+}
+function getHydrometerGradationText(){
+  if(!results.hydrometer||!results.hydrometer.adjPts||!results.hydrometer.adjPts.length)return null;
+  return results.hydrometer.adjPts.slice().sort((a,b)=>b.x-a.x).map(p=>`${p.x.toFixed(5)},${p.y.toFixed(2)}`).join('\n');
+}
+function fillGradFromHydro(){
+  const text=getHydrometerGradationText();
+  if(!text){alert('Run the Hydrometer module first to generate D and Pa values.');return;}
+  document.getElementById('hd').value=text;
+  alert('Hydrometer D (mm) and Pa (%) values transferred to the Gradation module.');
+}
+function transferHydroToGrad(){fillGradFromHydro();}
+function interpPctAtSize(curve,d){
+  const pts=[...curve].filter(p=>p.x>0).sort((a,b)=>b.x-a.x);
+  if(!pts.length) return 0;
+  if(d>=pts[0].x) return pts[0].y;
+  if(d<=pts[pts.length-1].x) return pts[pts.length-1].y;
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i],b=pts[i+1];
+    if(d<=a.x&&d>=b.x){
+      const f=(Math.log10(d)-Math.log10(a.x))/(Math.log10(b.x)-Math.log10(a.x));
+      return a.y + f*(b.y-a.y);
+    }
+  }
+  return pts[pts.length-1].y;
+}
+function buildBlendCurve(aPts,bPts,r){
+  const sizes=new Set([...aPts.map(p=>p.x),...bPts.map(p=>p.x)]);
+  const uniq=Array.from(sizes).sort((a,b)=>b-a);
+  return uniq.map(d=>({x:d,y:Math.min(100,Math.max(0,interpPctAtSize(aPts,d)*r + interpPctAtSize(bPts,d)*(1-r)))}));
+}
+function runBlend(){
+  const a=pCSV(document.getElementById('blend-A').value).map(r=>({x:r[0],y:r[1]}));
+  const b=pCSV(document.getElementById('blend-B').value).map(r=>({x:r[0],y:r[1]}));
+  if(!a.length||!b.length){alert('Enter gradation data for both Soil A and Soil B.');return;}
+  const r=parseFloat(document.getElementById('blend-R').value)/100;
+  const blended=buildBlendCurve(a,b,r);
+  const D10=logI(blended.map(p=>p.x),blended.map(p=>p.y),10);
+  const D30=logI(blended.map(p=>p.x),blended.map(p=>p.y),30);
+  const D60=logI(blended.map(p=>p.x),blended.map(p=>p.y),60);
+  const Cu=D60/D10;
+  const Cc=D30*D30/(D10*D60);
+  document.getElementById('blend-D10').textContent=D10.toFixed(4);
+  document.getElementById('blend-D30').textContent=D30.toFixed(4);
+  document.getElementById('blend-D60').textContent=D60.toFixed(4);
+  document.getElementById('blend-CU').textContent=Cu.toFixed(2);
+  document.getElementById('blend-CC').textContent=Cc.toFixed(2);
+  const LL=document.getElementById('blend-LL').value!==''?parseFloat(document.getElementById('blend-LL').value):null;
+  const PL=document.getElementById('blend-PL').value!==''?parseFloat(document.getElementById('blend-PL').value):null;
+  const PI=(LL!==null&&PL!==null)?LL-PL:null;
+  const fines=lerp([...blended.map(p=>Math.log10(p.x))].reverse(),[...blended.map(p=>p.y)].reverse(),Math.log10(0.075));
+  const p475=lerp([...blended.map(p=>Math.log10(p.x))].reverse(),[...blended.map(p=>p.y)].reverse(),Math.log10(4.75));
+  const uscs=uscsClassify(fines,p475,Cu,Cc,LL,PI);
+  document.getElementById('blend-uscs-symbol').textContent=uscs.cls==='?'?'—':uscs.cls;
+  document.getElementById('blend-uscs-name').textContent=uscs.name;
+  document.getElementById('blend-uscs-path').textContent=uscs.path;
+  document.getElementById('blend-uscs-params').textContent='Key parameters: '+uscs.params;
+  document.getElementById('blend-uscs-box').style.display='block';
+  document.getElementById('blend-ins').style.display='block';
+  document.getElementById('blend-ins-txt').textContent=`Blend ratio Soil A ${Math.round(r*100)}% / Soil B ${Math.round((1-r)*100)}% — Blended fines ${fines.toFixed(1)}%, P₄₇₅=${p475.toFixed(1)}%.`;
+  results.blend={ratio:(r*100).toFixed(0),soilA:a,soilB:b,blended,metrics:{D10:D10.toFixed(4),D30:D30.toFixed(4),D60:D60.toFixed(4),Cu:Cu.toFixed(2),Cc:Cc.toFixed(2),fines:fines.toFixed(1),p475:p475.toFixed(1),uscs}};
+  dC('blendC');
+  const s=getS();
+  charts.blendC=new Chart(document.getElementById('blendC').getContext('2d'),{
+    type:'scatter',
+    data:{datasets:[
+      {label:'Soil A',data:a,borderColor:'#185FA5',backgroundColor:'transparent',pointRadius:0,showLine:true,tension:0.2,fill:false,borderWidth:1},
+      {label:'Soil B',data:b,borderColor:'#8B1A1A',backgroundColor:'transparent',pointRadius:0,showLine:true,tension:0.2,fill:false,borderWidth:1},
+      {label:'Blended soil',data:blended,borderColor:'#0F6E56',backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,showLine:true,tension:0.2,fill:false,borderWidth:s.lw+1}
+    ]},
+    options:{...pO(s),scales:aX(s,'Particle size (mm)','% Passing',{x:{type:'logarithmic',reverse:true},y:{min:0,max:100}})}
+  });
+}
+function importBlendData(inp,target){
+  const f=inp.files[0];if(!f)return;const rdr=new FileReader();
+  rdr.onload=e=>{try{let rows=[];
+      if(f.name.match(/\.csv|\.txt/i)){
+        const lines=e.target.result.trim().split('\n');
+        lines.forEach(l=>{const parts=l.trim().split(/[\t,]/);if(parts.length>=2){const sz=parseFloat(parts[0]),pct=parseFloat(parts[1]);if(!isNaN(sz)&&!isNaN(pct))rows.push(sz+','+pct);}});
+      } else {
+        const wb=XLSX.read(e.target.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const data=XLSX.utils.sheet_to_json(ws,{header:1});
+        data.forEach((row,i)=>{if(i===0) return;const sz=parseFloat(row[0]),pct=parseFloat(row[1]);if(!isNaN(sz)&&!isNaN(pct))rows.push(sz+','+pct);});
+      }
+      if(rows.length){document.getElementById(target).value=rows.join('\n');alert('Imported '+rows.length+' rows into '+target.replace('blend-','Soil '));}
+    }catch(err){alert('Error: '+err.message);} };
+  if(f.name.match(/\.csv|\.txt/i)) rdr.readAsText(f); else rdr.readAsArrayBuffer(f);
+  inp.value='';
+}
+function exportBlendExcel(){
+  if(!results.blend){alert('Run the soil blend first.');return;}
+  const m=getMeta();
+  const rows=[['GeoYantra Pro — Blended soil synthesis'],['Project:',m.name,'Ref:',m.ref,'Date:',m.date,'By:',m.by],[''],['Soil A gradation'],['Particle size (mm)','% passing'],...results.blend.soilA.map(p=>[p.x,p.y]),[''],['Soil B gradation'],['Particle size (mm)','% passing'],...results.blend.soilB.map(p=>[p.x,p.y]),[''],['Blended gradation'],['Particle size (mm)','% passing'],...results.blend.blended.map(p=>[p.x,p.y])];
+  const wb=XLSX.utils.book_new();
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  XLSX.utils.book_append_sheet(wb,ws,'Blend');
+  XLSX.writeFile(wb,'GeoYantra_Soil_Blend.xlsx');
+}
+function exportHydroExcel(){
+  if(!results.hydrometer||!results.hydrometer.tableRows){alert('Run the Hydrometer module first to export results.');return;}
+  const m=getMeta();
+  const wb=XLSX.utils.book_new();
+  const hdr=[['GeoYantra Pro — Hydrometer Analysis'],['Project:',m.name,'Ref:',m.ref,'Date:',m.date,'By:',m.by],[''],['Time (min)','R','Rm','Rc','L (cm)','D (mm)','P (%)','Pa (%)']];
+  const dr=results.hydrometer.tableRows.map(r=>[r.t,r.R,r.Rm,r.Rc,r.L,r.D,r.P,r.Pa]);
+  const ws=XLSX.utils.aoa_to_sheet([...hdr,...dr]);
+  XLSX.utils.book_append_sheet(wb,ws,'Hydrometer');
+  XLSX.writeFile(wb,'GeoYantra_Hydrometer.xlsx');
+}
+
+/* ══════ GRADATION + USCS CLASSIFICATION ══════ */
+
+// Returns {cls, name, path, params, risk, dual} following strict USCS logic
+function uscsClassify(fines, p475, Cu, Cc, LL, PI){
+  // Helper: is PI above A-line?
+  function aboveALine(ll,pi){ return pi > 0.73*(ll-20); }
+  // Step 1: Fine-grained if fines > 50%
+  if(fines > 50){
+    if(LL === null || PI === null) return {cls:'?', name:'Plasticity data required', path:'Fines > 50% → fine-grained soil. LL and PI are required to classify.', params:'', risk:'high', dual:false, needsPlasticity:true};
+    if(LL > 50){
+      if(aboveALine(LL,PI)) return {cls:'CH', name:'Fat Clay (CH)', path:'Fines > 50% → fine-grained. LL > 50 and PI > 0.73(LL−20) → CH', params:`LL=${LL}, PI=${PI.toFixed(2)}, A-line threshold=0.73×(${LL}−20)=${(0.73*(LL-20)).toFixed(2)}`, risk:'high', dual:false};
+      else return {cls:'MH', name:'Elastic Silt (MH)', path:'Fines > 50% → fine-grained. LL > 50 and PI ≤ 0.73(LL−20) → MH', params:`LL=${LL}, PI=${PI.toFixed(2)}, A-line threshold=${(0.73*(LL-20)).toFixed(2)}`, risk:'high', dual:false};
+    } else {
+      if(LL >= 7 && LL <= 27 && PI >= 4 && PI <= 7 && aboveALine(LL,PI)) return {cls:'CL-ML', name:'Silty Clay (CL-ML)', path:'Fines > 50% → fine-grained. LL 7–27, PI 4–7, point on/above A-line → CL-ML', params:`LL=${LL}, PI=${PI.toFixed(2)}, A-line threshold=${(0.73*(LL-20)).toFixed(2)}`, risk:'high', dual:false};
+      if(aboveALine(LL,PI)) return {cls:'CL', name:'Lean Clay (CL)', path:'Fines > 50% → fine-grained. LL ≤ 50 and PI > 0.73(LL−20) → CL', params:`LL=${LL}, PI=${PI.toFixed(2)}, A-line threshold=${(0.73*(LL-20)).toFixed(2)}`, risk:'high', dual:false};
+      else return {cls:'ML', name:'Silt (ML)', path:'Fines > 50% → fine-grained. LL ≤ 50 and PI ≤ 0.73(LL−20) → ML', params:`LL=${LL}, PI=${PI.toFixed(2)}, A-line threshold=${(0.73*(LL-20)).toFixed(2)}`, risk:'moderate', dual:false};
+    }
+  }
+  // Step 2: Coarse-grained (fines ≤ 50%)
+  // Determine Sand or Gravel
+  const isGravel = p475 <= 50; // % passing 4.75mm ≤ 50 → more than half retained → Gravel
+  const type = isGravel ? 'G' : 'S';
+  const typeName = isGravel ? 'Gravel' : 'Sand';
+
+  // Step A: Fines 0–5% → Clean soil
+  if(fines <= 5){
+    let baseSymbol, gradDesc, gradOk;
+    if(type==='S'){
+      gradOk = Cu>=6 && Cc>=1 && Cc<=3;
+      baseSymbol = gradOk ? 'SW' : 'SP';
+      gradDesc = gradOk ? `Cu=${Cu.toFixed(2)}≥6 and 1≤Cc=${Cc.toFixed(2)}≤3 → well-graded` : `Cu=${Cu.toFixed(2)} or Cc=${Cc.toFixed(2)} fails criteria → poorly graded`;
+    } else {
+      gradOk = Cu>=4 && Cc>=1 && Cc<=3;
+      baseSymbol = gradOk ? 'GW' : 'GP';
+      gradDesc = gradOk ? `Cu=${Cu.toFixed(2)}≥4 and 1≤Cc=${Cc.toFixed(2)}≤3 → well-graded` : `Cu=${Cu.toFixed(2)} or Cc=${Cc.toFixed(2)} fails criteria → poorly graded`;
+    }
+    const names={SW:'Well-Graded Sand',SP:'Poorly Graded Sand',GW:'Well-Graded Gravel',GP:'Poorly Graded Gravel'};
+    return {cls:baseSymbol, name:names[baseSymbol], path:`Fines=${fines.toFixed(1)}% ≤ 5% → clean ${typeName}. ${gradDesc} → ${baseSymbol}`, params:`Fines=${fines.toFixed(1)}%, Cu=${Cu.toFixed(2)}, Cc=${Cc.toFixed(2)}, % passing 4.75mm=${p475.toFixed(1)}%`, risk:'low', dual:false};
+  }
+
+  // Step B: Fines 5–12% → DUAL classification required
+  if(fines > 5 && fines <= 12){
+    let gradSymbol;
+    if(type==='S') gradSymbol = (Cu>=6 && Cc>=1 && Cc<=3) ? 'SW' : 'SP';
+    else gradSymbol = (Cu>=4 && Cc>=1 && Cc<=3) ? 'GW' : 'GP';
+    if(LL === null || PI === null){
+      const dualOptions = gradSymbol[0] === 'S'
+        ? [`${gradSymbol}-SC`, `${gradSymbol}-SM`]
+        : [`${gradSymbol}-GC`, `${gradSymbol}-GM`];
+      return {cls:dualOptions.join('/'), name:`Possible ${dualOptions.join(' or ')}`, path:`Fines=${fines.toFixed(1)}% in 5–12% range → DUAL classification possible. Gradation symbol = ${gradSymbol}. Plasticity is needed to decide between ${dualOptions.join(' and ')}.`, params:`Fines=${fines.toFixed(1)}%, Cu=${Cu.toFixed(2)}, Cc=${Cc.toFixed(2)}, % passing 4.75mm=${p475.toFixed(1)}%`, risk:'moderate', dual:true, needsPlasticity:true};
+    }
+    // Special CL-ML hatched fines exception in 5–12% range
+    if(LL >= 7 && LL <= 27 && PI >= 4 && PI <= 7 && aboveALine(LL,PI)){
+      const tripleCls = gradSymbol + '-' + gradSymbol[0] + 'M-' + gradSymbol[0] + 'C';
+      const tripleNames={
+        'SW-SM-SC':'Well-Graded Sand with Silty Clay',
+        'SP-SM-SC':'Poorly Graded Sand with Silty Clay',
+        'GW-GM-GC':'Well-Graded Gravel with Silty Clay',
+        'GP-GM-GC':'Poorly Graded Gravel with Silty Clay'
+      };
+      return {cls:tripleCls, name:tripleNames[tripleCls]||tripleCls, path:`Fines=${fines.toFixed(1)}% in 5–12% range → DUAL classification required. Gradation: ${gradSymbol}. Fines are in the CL-ML hatched region (LL=${LL}, PI=${PI.toFixed(2)}) → ${tripleCls}`, params:`Fines=${fines.toFixed(1)}%, Cu=${Cu.toFixed(2)}, Cc=${Cc.toFixed(2)}, LL=${LL}, PI=${PI.toFixed(2)}, % passing 4.75mm=${p475.toFixed(1)}%`, risk:'moderate', dual:true};
+    }
+    // Gradation symbol
+    if(type==='S') gradSymbol = (Cu>=6 && Cc>=1 && Cc<=3) ? 'SW' : 'SP';
+    else gradSymbol = (Cu>=4 && Cc>=1 && Cc<=3) ? 'GW' : 'GP';
+    // Plasticity symbol
+    const plastSymbol = aboveALine(LL,PI) ? 'C' : 'M';
+    const dualCls = gradSymbol + '-' + gradSymbol[0] + plastSymbol;
+    const plastDesc = aboveALine(LL,PI) ? `PI=${PI.toFixed(2)} > 0.73×(LL−20)=${(0.73*(LL-20)).toFixed(2)} → clayey (C)` : `PI=${PI.toFixed(2)} ≤ 0.73×(LL−20)=${(0.73*(LL-20)).toFixed(2)} → silty (M)`;
+    const dualNames={
+      'SW-SC':'Well-Graded Sand with Clay','SW-SM':'Well-Graded Sand with Silt',
+      'SP-SC':'Poorly Graded Sand with Clay','SP-SM':'Poorly Graded Sand with Silt',
+      'GW-GC':'Well-Graded Gravel with Clay','GW-GM':'Well-Graded Gravel with Silt',
+      'GP-GC':'Poorly Graded Gravel with Clay','GP-GM':'Poorly Graded Gravel with Silt'
+    };
+    return {cls:dualCls, name:dualNames[dualCls]||dualCls, path:`Fines=${fines.toFixed(1)}% in 5–12% range → DUAL classification required.\nGradation: ${gradSymbol}. Plasticity: ${plastDesc}.\nDual symbol = ${dualCls}`, params:`Fines=${fines.toFixed(1)}%, Cu=${Cu.toFixed(2)}, Cc=${Cc.toFixed(2)}, LL=${LL}, PI=${PI.toFixed(2)}, % passing 4.75mm=${p475.toFixed(1)}%`, risk:'moderate', dual:true};
+  }
+
+  // Step C: Fines 12–50% → Single classification based on plasticity only
+  if(LL === null || PI === null){
+    const possibleSymbols = type==='S' ? ['SC','SM'] : ['GC','GM'];
+    return {cls:possibleSymbols.join('/'), name:`Possible ${possibleSymbols.join(' or ')}`, path:`Fines=${fines.toFixed(1)}% in 12–50% range → single classification possible. Plasticity is needed to decide between ${possibleSymbols.join(' and ')}.`, params:`Fines=${fines.toFixed(1)}%, % passing 4.75mm=${p475.toFixed(1)}%`, risk:'moderate', dual:false, needsPlasticity:true};
+  }
+  const plastSymbol = aboveALine(LL,PI) ? 'C' : 'M';
+  const singleCls = type + plastSymbol;
+  const plastDesc = aboveALine(LL,PI) ? `PI=${PI.toFixed(2)} > 0.73×(LL−20)=${(0.73*(LL-20)).toFixed(2)} → clayey (C)` : `PI=${PI.toFixed(2)} ≤ 0.73×(LL−20)=${(0.73*(LL-20)).toFixed(2)} → silty (M)`;
+  const singleNames={SC:'Clayey Sand',SM:'Silty Sand',GC:'Clayey Gravel',GM:'Silty Gravel'};
+  return {cls:singleCls, name:singleNames[singleCls]||singleCls, path:`Fines=${fines.toFixed(1)}% in 12–50% range → single classification. ${plastDesc} → ${singleCls}`, params:`Fines=${fines.toFixed(1)}%, LL=${LL}, PI=${PI.toFixed(2)}, % passing 4.75mm=${p475.toFixed(1)}%`, risk:plastSymbol==='C'?'moderate':'low', dual:false};
+}
+
+function goToPlasticity(){
+  const ni=document.querySelector('.ni:nth-child(3)'); // plasticity nav item
+  document.querySelectorAll('.ni').forEach(n=>{if(n.textContent.includes('Plasticity'))n.click();});
+}
+
+function classifyFineGrained(){
+  const LL=parseFloat(document.getElementById('grad-LL').value);
+  const PL=parseFloat(document.getElementById('grad-PL').value);
+  if(isNaN(LL)||isNaN(PL)){alert('Please enter LL and PL in the Plasticity data fields above, then try again.');return;}
+  runGrad();
+}
+
+function runGrad(){
+  const sieve=pCSV(document.getElementById('sd').value),hydro=pCSV(document.getElementById('hd').value);
+  const combined=[...sieve,...hydro].sort((a,b)=>b[0]-a[0]);
+  const sz=combined.map(d=>d[0]),p=combined.map(d=>d[1]);
+  const D60=logI(sz,p,60),D30=logI(sz,p,30),D10=logI(sz,p,10);
+  const Cu=D60/D10,Cc=D30*D30/(D10*D60);
+  const lS=sz.map(s=>Math.log10(s));
+  const fines=lerp([...lS].reverse(),[...p].reverse(),Math.log10(0.075));
+  const p475=lerp([...lS].reverse(),[...p].reverse(),Math.log10(4.75));
+  const clay=lerp([...lS].reverse(),[...p].reverse(),Math.log10(0.002));
+  const silt=Math.max(0,fines-clay);
+
+  document.getElementById('D10').textContent=D10.toFixed(4);
+  document.getElementById('D30').textContent=D30.toFixed(4);
+  document.getElementById('D60').textContent=D60.toFixed(4);
+  document.getElementById('CU').textContent=Cu.toFixed(2);
+  document.getElementById('CC').textContent=Cc.toFixed(2);
+  document.getElementById('FIN').textContent=fines.toFixed(1)+'%';
+  document.getElementById('P475').textContent=p475.toFixed(1)+'%';
+  document.getElementById('SILT').textContent=silt.toFixed(1)+'%';
+
+  // Get plasticity inputs from gradation module
+  const llRaw=document.getElementById('grad-LL').value;
+  const plRaw=document.getElementById('grad-PL').value;
+  const LL=llRaw!==''?parseFloat(llRaw):null;
+  const PL=plRaw!==''?parseFloat(plRaw):null;
+  const PI=(LL!==null && PL!==null) ? LL-PL : null;
+
+  // Show fines > 50% prompt
+  const prompt=document.getElementById('grad-fine-prompt');
+  if(fines>50 && (LL===null||PL===null)){
+    prompt.style.display='block';
+    document.getElementById('grad-fine-prompt-txt').textContent=`⚠ % passing 0.075mm = ${fines.toFixed(1)}% > 50% — this is a fine-grained soil.`;
+  } else {
+    prompt.style.display='none';
+  }
+
+  // Run USCS
+  const uscs=uscsClassify(fines,p475,Cu,Cc,LL,PI);
+
+  // Update badge
+  const badge=document.getElementById('grad-badge');
+  badge.style.display='inline-flex';
+  const riskClass=uscs.risk==='high'?'pr':uscs.risk==='moderate'?'pw':'pg';
+  badge.className='pill '+riskClass;
+  badge.textContent=uscs.cls==='?'?'—':uscs.cls;
+
+  // Show USCS result box
+  const box=document.getElementById('uscs-result-box');
+  if(uscs.cls!=='?'){
+    box.style.display='block';
+    document.getElementById('uscs-symbol').textContent=uscs.cls;
+    document.getElementById('uscs-name').textContent=uscs.name;
+    document.getElementById('uscs-path').textContent=uscs.path;
+    document.getElementById('uscs-params').textContent='Key parameters: '+uscs.params;
+    // Highlight dual classification
+    if(uscs.dual){
+      document.getElementById('uscs-name').innerHTML=uscs.name+' <span class="pill pb" style="font-size:9px;margin-left:5px">Dual</span>';
+    }
+  } else {
+    box.style.display='block';
+    document.getElementById('uscs-symbol').textContent='?';
+    document.getElementById('uscs-name').textContent=uscs.name;
+    document.getElementById('uscs-path').textContent=uscs.path;
+    document.getElementById('uscs-params').textContent='';
+  }
+
+  // Interpretation insight
+  const interpMap={
+    CH:'High-plasticity fat clay — high shrink-swell and settlement risk; avoid as bearing material without treatment.',
+    MH:'High-plasticity elastic silt — very compressible; expect high long-term settlement.',
+    CL:'Low-plasticity lean clay — moderate compressibility; compaction control required.',
+    ML:'Low-plasticity silt — frost-susceptible; poor drainage; stabilization recommended.',
+    SW:'Well-graded sand — good shear strength and drainage; suitable for engineered fill.',
+    SP:'Poorly graded sand — susceptible to liquefaction; check density and drainage.',
+    GW:'Well-graded gravel — excellent bearing and drainage; favoured for base courses.',
+    GP:'Poorly graded gravel — check uniformity; may require densification.',
+    SM:'Silty sand — compact at OMC; monitor drainage during wet season.',
+    SC:'Clayey sand — shrink-swell risk; drainage and compaction control required.',
+    GM:'Silty gravel — generally stable; verify drainage capacity.',
+    GC:'Clayey gravel — monitor moisture; compaction critical.',
+    'SW-SM-SC':'Well-graded sand with silty clay — cohesive yet sensitive; verify moisture control and compaction.',
+    'SP-SM-SC':'Poorly graded sand with silty clay — low cohesion and sensitivity; monitor saturation and stability.',
+    'GW-GM-GC':'Well-graded gravel with silty clay — coarse matrix with clayey fines; watch drainage and compaction.',
+    'GP-GM-GC':'Poorly graded gravel with silty clay — gap-graded with sensitive fines; verify D10 and moisture response.',
+    'CL-ML':'Silty Clay (CL-ML) — High moisture sensitivity. Rapid strength loss when wet. Requires strict moisture control (±2%) during compaction.',
+  };
+  const baseKey=uscs.cls.length>2?uscs.cls.split('-')[0]:uscs.cls;
+  const interp=interpMap[uscs.cls]||interpMap[baseKey]||'Engineering assessment required.';
+  const gapWarning = (Cu>1000 || Cc>20) ? ' Gap-Graded / Artificial Mix caution — D10 may be extrapolated; verify with additional sieving.' : '';
+  const possibleHint = (()=>{
+    if(!uscs.cls.includes('/')) return '';
+    const parts = uscs.cls.split('/');
+    const [siltPct, clayPct] = [silt, clay];
+    const direction = siltPct > clayPct ? 'silt' : clayPct > siltPct ? 'clay' : null;
+    if(!direction) return 'Silt and clay are similar, so LL/PI are required to decide between the clayey and silty options.';
+    const likelySuffix = siltPct > clayPct ? 'M' : 'C';
+    const likelySymbol = parts.find(part => part.endsWith(likelySuffix)) || parts[0];
+    return `Most likely: <strong>${likelySymbol}</strong>. ${direction === 'silt' ? 'Silt exceeds clay.' : 'Clay exceeds silt.'}`;
+  })();
+  const interpText = interp + gapWarning + (possibleHint ? ' ' + possibleHint : '');
+  document.getElementById('grad-ins').style.display='block';
+  document.getElementById('grad-ins-txt').innerHTML = `${uscs.cls} — ${interpText}`;
+
+  results.gradation={cls:uscs.cls,name:uscs.name,interp:interpText,Cu:Cu.toFixed(2),Cc:Cc.toFixed(2),D10:D10.toFixed(4),D30:D30.toFixed(4),D60:D60.toFixed(4),fines:fines.toFixed(1),p475:p475.toFixed(1),silt:silt.toFixed(1),clay:clay.toFixed(1),risk:uscs.risk};
+
+  // Plot chart
+  dC('gradC');const s=getS();
+  const sd2=gView!=='hydro'?[...sieve].sort((a,b)=>b[0]-a[0]):[];
+  const hd2=gView!=='sieve'?[...hydro].sort((a,b)=>b[0]-a[0]):[];
+  const ds=[];
+  if(sd2.length)ds.push({label:'Sieve analysis',data:sd2.map(d=>({x:d[0],y:d[1]})),borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,tension:0.2,fill:false,showLine:true,borderWidth:s.lw});
+  if(hd2.length)ds.push({label:'Hydrometer (adjusted)',data:hd2.map(d=>({x:d[0],y:d[1]})),borderColor:s.col.s,backgroundColor:s.col.fill2,pointRadius:s.pt,pointStyle:s.pt2,tension:0.2,fill:false,showLine:true,borderWidth:s.lw,borderDash:[4,2]});
+  const ax=aX(s,'Particle size (mm)','% Passing',{x:{type:'logarithmic',reverse:true},y:{min:0,max:100}});
+  charts.gradC=new Chart(document.getElementById('gradC').getContext('2d'),{type:'scatter',data:{datasets:ds},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ PLASTICITY ══════ */
+function runPlast(){
+  const ll=parseFloat(document.getElementById('LL').value),pl=parseFloat(document.getElementById('PL').value);
+  const wn=parseFloat(document.getElementById('WN').value)||null,cp=parseFloat(document.getElementById('CLAYACT').value)||null;
+  const pi=ll-pl;
+  document.getElementById('PI-out').textContent=pi.toFixed(2);
+  if(wn){const li=(wn-pl)/pi;document.getElementById('LI-out').textContent=li.toFixed(2);document.getElementById('LI-st').textContent=li<0?'Stiff':li<0.5?'Semi-stiff':li<1?'Soft':'Very soft';}else document.getElementById('LI-out').textContent='—';
+  if(cp&&cp>0)document.getElementById('ACT-out').textContent=(pi/cp).toFixed(2);else document.getElementById('ACT-out').textContent='—';
+  const al=0.73*(ll-20);let cls='',interp='';
+  if(ll<50){
+    if(ll>=7 && ll<=27 && pi>=4 && pi<=7 && pi>=al){
+      cls='CL-ML';
+      interp='Silty Clay (CL-ML) — High moisture sensitivity. Rapid strength loss when wet. Requires strict moisture control (±2%) during compaction.';
+    } else {
+      cls=pi>=al?'CL':'ML';
+      interp=cls==='CL'?'Lean Clay (CL) — moderate compressibility, earthworks with compaction control.':'Lean Silt (ML) — frost-susceptible, poor drainage; stabilization recommended.';
+    }
+  } else {
+    cls=pi>=al?'CH':'MH';
+    interp=cls==='CH'?'Fat Clay (CH) — high shrink-swell; avoid as bearing material without treatment.':'Elastic Silt (MH) — very compressible, high long-term settlement expected.';
+  }
+  document.getElementById('plast-ins').style.display='block';document.getElementById('plast-ins-txt').textContent='USCS '+cls+' — '+interp;
+  results.plasticity={cls,interp,ll:ll.toFixed(1),pl:pl.toFixed(1),pi:pi.toFixed(2)};
+  dC('plastC');const s=getS();
+  const lv=[],av=[],uv=[];for(let v=0;v<=100;v+=2){lv.push(v);av.push(Math.max(0,0.73*(v-20)));uv.push(Math.max(0,0.9*(v-8)));}
+  const ax=aX(s,'Liquid Limit, LL (%)','Plasticity Index, PI (%)',{x:{min:0,max:100},y:{min:0,max:60}});
+  const baseOptions=pO(s);
+  const hatchedPlugin={
+    id:'hatchedRegion',
+    afterDraw(chart){
+      const ctx=chart.ctx;const xScale=chart.scales.x;const yScale=chart.scales.y;
+      if(!xScale||!yScale) return;
+      const xMin=xScale.getPixelForValue(7);
+      const xMax=xScale.getPixelForValue(27);
+      const yMin=yScale.getPixelForValue(7);
+      const yMax=yScale.getPixelForValue(4);
+      const patternCanvas=document.createElement('canvas');patternCanvas.width=8;patternCanvas.height=8;
+      const pctx=patternCanvas.getContext('2d');
+      pctx.strokeStyle='rgba(55,125,180,0.35)';pctx.lineWidth=1;
+      pctx.beginPath();pctx.moveTo(0,0);pctx.lineTo(8,8);pctx.stroke();
+      pctx.beginPath();pctx.moveTo(8,0);pctx.lineTo(0,8);pctx.stroke();
+      const pattern=ctx.createPattern(patternCanvas,'repeat');
+      ctx.save();ctx.fillStyle=pattern;ctx.strokeStyle='rgba(55,125,180,0.55)';ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.rect(xMin,yMax,xMax-xMin,yMin-yMax);
+      ctx.fill();ctx.stroke();
+      ctx.restore();
+      ctx.save();ctx.strokeStyle='rgba(55,125,180,0.55)';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(xScale.getPixelForValue(50),yScale.top);ctx.lineTo(xScale.getPixelForValue(50),yScale.bottom);ctx.stroke();ctx.restore();
+    }
+  };
+  charts.plastC=new Chart(document.getElementById('plastC').getContext('2d'),{type:'scatter',data:{datasets:[
+    {label:'A-line',data:lv.map((x,i)=>({x,y:av[i]})),showLine:true,borderColor:s.col.a,pointRadius:0,fill:false,tension:0,borderWidth:s.lw,borderDash:[6,3]},
+    {label:'U-line',data:lv.map((x,i)=>({x,y:uv[i]})),showLine:true,borderColor:s.col.s,borderDash:[3,3],pointRadius:0,fill:false,tension:0,borderWidth:s.lw*0.8},
+    {label:`LL=${ll.toFixed(0)}, PI=${pi.toFixed(1)} (${cls})`,data:[{x:ll,y:pi}],pointRadius:s.pt*1.8,pointStyle:'star',pointBackgroundColor:s.col.p,pointBorderColor:s.col.p,pointBorderWidth:2}
+  ]},options:{...baseOptions,scales:ax,plugins:{...(baseOptions.plugins||{}),hatchedRegion:{}}},plugins:[hatchedPlugin]});
+}
+
+/* ══════ CBR ══════ */
+function runCBR(){
+  const rows=pCSV(document.getElementById('cbrD').value),pen=rows.map(r=>r[0]),ld=rows.map(r=>r[1]);
+  const s25=parseFloat(document.getElementById('S25').value),s50=parseFloat(document.getElementById('S50').value);
+  const l0=lerp(pen,ld,0),l1=lerp(pen,ld,1),l2=lerp(pen,ld,2);
+  const s1=l1-l0, s2=l2-l1;
+  const correctionTriggered=s2>1.5*s1;
+  let zeroShift=0, corrected25, corrected50, note='';
+  if(correctionTriggered){
+    let maxSlope=0, maxIndex=0;
+    for(let i=0;i<pen.length-1;i++){
+      const dx=pen[i+1]-pen[i];
+      if(dx<=0) continue;
+      const slope=(ld[i+1]-ld[i])/dx;
+      if(slope>maxSlope){maxSlope=slope;maxIndex=i;}
+    }
+    if(maxSlope>0){
+      const x0=pen[maxIndex],y0=ld[maxIndex];
+      zeroShift=Math.max(0,y0/maxSlope);
+    }
+    corrected25=lerp(pen,ld,2.5+zeroShift);
+    corrected50=lerp(pen,ld,5.0+zeroShift);
+    note=`Zero-correction detected (s2=${s2.toFixed(2)} > 1.5·s1=${(1.5*s1).toFixed(2)}). Shifted by ${zeroShift.toFixed(2)} mm.`;
+  } else {
+    corrected25=lerp(pen,ld,2.5);
+    corrected50=lerp(pen,ld,5.0);
+  }
+  const c25=corrected25/s25*100, c50=corrected50/s50*100;
+  const nonConforming=c50>c25;
+  const gov=nonConforming?c25:Math.max(c25,c50);
+  if(nonConforming){
+    note=`${note} CBR@5.0mm (${c50.toFixed(1)}%) exceeds CBR@2.5mm (${c25.toFixed(1)}%). Technically non-conforming per ASTM D1883; re-test on a new sample before accepting the higher value.`.trim();
+  }
+  document.getElementById('CBR25').textContent=c25.toFixed(1)+'%';document.getElementById('CBR50').textContent=c50.toFixed(1)+'%';document.getElementById('CBRGOV').textContent=gov.toFixed(1)+'%';
+  const suit=gov<3?'Very poor subgrade — full stabilization required.':gov<7?'Poor to fair — thick base course needed.':gov<20?'Good subgrade — standard pavement design.':'Excellent — reduced base course may be adopted.';
+  document.getElementById('cbr-ins').style.display='block';document.getElementById('cbr-ins-txt').textContent=(nonConforming?`Preliminary governing CBR ${gov.toFixed(1)}% — ${suit} ${note}`:`Governing CBR ${gov.toFixed(1)}% — ${suit}`);
+  results.cbr={c25:c25.toFixed(1),c50:c50.toFixed(1),gov:gov.toFixed(1),suit:suit,note:note};
+  dC('cbrC');const s=getS();const ax=aX(s,'Penetration (mm)','Load (kN)',{y:{min:0}});
+  charts.cbrC=new Chart(document.getElementById('cbrC').getContext('2d'),{type:'line',data:{labels:pen,datasets:[{label:'Load (kN)',data:ld,borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,tension:0.35,fill:true,borderWidth:s.lw}]},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ COMPACTION — ZAV FIXED ══════ */
+function runComp(){
+  const rows=pCSV(document.getElementById('compD').value),wc=rows.map(r=>r[0]),dd=rows.map(r=>r[1]);
+  const Gs=parseFloat(document.getElementById('GS').value)||2.68,yw=9.81;
+  const mx=Math.max(...dd),idx=dd.indexOf(mx),omc=wc[idx];
+  const e=Math.max(0, Gs*yw/mx-1);
+  let Sr=NaN, srText='—', srWarning='';
+  if(e>0){
+    Sr=(Gs*(omc/100))/e*100;
+    if(Sr>=100){
+      srText='>100%';
+      srWarning='ERROR: Data plots above ZAV line. Check Gs or lab data.';
+    } else if(Sr>95){
+      srText=Sr.toFixed(1)+'%';
+      srWarning='Warning: High saturation. Results may be non-representative.';
+    } else {
+      srText=Sr.toFixed(1)+'%';
+    }
+  } else {
+    srText='Invalid';
+    srWarning='ERROR: Invalid ZAV calculation. Check Gs and density inputs.';
+  }
+  document.getElementById('OMC').textContent=omc.toFixed(1);document.getElementById('MDD').textContent=mx.toFixed(2);document.getElementById('SR').textContent=srText;
+  let assessment='';
+  if(srWarning && srWarning.startsWith('ERROR')){
+    assessment=`STATUS: INVALID. Calculated MDD (${mx.toFixed(2)} kN/m³) at OMC (${omc.toFixed(1)}%) plots above the Zero Air Voids (ZAV) line (S_r > 100%). This result is physically impossible. Action Required: Verify Specific Gravity (G_s) or re-run the Proctor laboratory test.`;
+  } else {
+    const suit=mx>18?'High MDD — excellent for engineered fill.':mx>16?'Acceptable — standard specification.':'Low MDD — review compaction effort.';
+    assessment='OMC '+omc.toFixed(1)+'%, MDD '+mx.toFixed(2)+' kN/m³ — '+suit+(srWarning?' '+srWarning:'');
+  }
+  document.getElementById('comp-ins').style.display='block';document.getElementById('comp-ins-txt').textContent=assessment;
+  results.compaction={omc:omc.toFixed(1),mdd:mx.toFixed(2),sr:Number.isFinite(Sr)?Sr.toFixed(1):'NaN',suit:srWarning && srWarning.startsWith('ERROR')?'INVALID':(mx>18?'High MDD — excellent for engineered fill.':mx>16?'Acceptable — standard specification.':'Low MDD — review compaction effort.'),Gs,note:srWarning};
+  const wcMin=Math.min(...wc)-2,wcMax=Math.max(...wc)+2;
+  const zavPts=[];for(let w=wcMin;w<=wcMax;w+=0.5){const den=(1/Gs)+(w/100);if(den>0)zavPts.push({x:w,y:parseFloat((yw/den).toFixed(4))});}
+  dC('compC');const s=getS();
+  const ax=aX(s,'Water content, w (%)','Dry density, γd (kN/m³)',{x:{type:'linear',min:Math.floor(wcMin),max:Math.ceil(wcMax)}});
+  charts.compC=new Chart(document.getElementById('compC').getContext('2d'),{type:'scatter',data:{datasets:[
+    {label:'Compaction curve',data:rows.map(r=>({x:r[0],y:r[1]})),borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,showLine:true,tension:0.4,fill:true,borderWidth:s.lw,order:1},
+    {label:'Zero air voids (ZAV, Sr=100%)',data:zavPts,borderColor:s.col.a,backgroundColor:'transparent',pointRadius:0,showLine:true,tension:0.1,fill:false,borderWidth:s.lw,borderDash:[6,4],order:2}
+  ]},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ CONSOLIDATION ══════ */
+function formatTimeYears(years){
+  if(!isFinite(years) || years<=0) return '—';
+  const whole=Math.floor(years);
+  const months=Math.round((years-whole)*12);
+  if(whole===0) return months>0?months+' mo':'<1 mo';
+  return months===0?whole+' yr':whole+' yr '+months+' mo';
+}
+function runConsol(){
+  const rows=pCSV(document.getElementById('consolD').value),sig=rows.map(r=>r[0]),ev=rows.map(r=>r[1]),n=sig.length;
+  const pc=parseFloat(document.getElementById('PC').value)||100;
+  const e0Input=parseFloat(document.getElementById('E0').value);
+  const e0=Number.isFinite(e0Input)?e0Input:ev[0];
+  const sv0=parseFloat(document.getElementById('SV0').value)||50,ds2=parseFloat(document.getElementById('DS').value)||80;
+  const H=parseFloat(document.getElementById('HL').value)||5;
+  const cvInput=parseFloat(document.getElementById('CV').value)||0;
+  const cvUnit=document.getElementById('CVU').value;
+  const drainType=document.getElementById('DR').value;
+  const Usel=parseInt(document.getElementById('DU').value,10)||50;
+  const d = drainType==='single'?H:H/2;
+  const tv={50:0.197,90:0.848,95:1.129}[Usel]||0.197;
+  const e_pc = lerp(sig, ev, pc);
+  const idxAbovePC = sig.findIndex(s=>s>pc);
+  let Cs = 0, Cc = 0;
+  if(idxAbovePC > 0){
+    const e_low = ev[0];
+    Cs = (e_low - e_pc) / Math.log10(pc / sig[0]);
+  }
+  if(idxAbovePC >= 0){
+    const sigmaStart = idxAbovePC > 0 ? pc : sig[0];
+    const eStart = idxAbovePC > 0 ? e_pc : ev[0];
+    const sigmaEnd = sig[n-1];
+    const eEnd = ev[n-1];
+    if(sigmaEnd > sigmaStart) Cc = (eStart - eEnd) / Math.log10(sigmaEnd / sigmaStart);
+  }
+  const OCR=pc/sv0;
+  const sv1=sv0+ds2;let sett=0;
+  if(sv0>=pc){
+    sett=H*1000*Cc*Math.log10((sv0+ds2)/sv0)/(1+e0);
+  } else if(sv1<=pc){
+    sett=H*1000*Cs*Math.log10(sv1/sv0)/(1+e0);
+  } else {
+    sett=H*1000*(Cs*Math.log10(pc/sv0)+Cc*Math.log10(sv1/pc))/(1+e0);
+  }
+  const settlement=Math.max(0,sett);
+  let timeFactor = 0;
+  if(cvInput>0){
+    if(cvUnit==='mm2min'){
+      timeFactor = 1e6/(525600*cvInput);
+    } else {
+      timeFactor = 1/cvInput;
+    }
+  }
+  const t50 = cvInput>0?formatTimeYears(0.197*d*d*timeFactor):'—';
+  const t90 = cvInput>0?formatTimeYears(0.848*d*d*timeFactor):'—';
+  const tU = cvInput>0?formatTimeYears(tv*d*d*timeFactor):'—';
+  document.getElementById('CC-con').textContent=Cc.toFixed(3);
+  document.getElementById('CS-con').textContent=Cs.toFixed(3);
+  document.getElementById('OCR').textContent=OCR.toFixed(1);
+  document.getElementById('SETT').textContent=settlement.toFixed(0);
+  document.getElementById('DRAIN').textContent=d.toFixed(3);
+  document.getElementById('T50').textContent=t50;
+  document.getElementById('T90').textContent=t90;
+  document.getElementById('TU').textContent=tU;
+  let state='';
+  if(settlement<25) state='Negligible/Minor settlement';
+  else if(settlement<75) state='Moderate settlement';
+  else if(settlement<150) state='Significant settlement';
+  else state='Severe / High Risk — requires ground improvement or deep foundations';
+  const timeMsg = cvInput>0?(' t₅₀='+t50+', t₉₀='+t90+', tᵤ='+tU):' No time data — enter valid cᵥ.';
+  document.getElementById('consol-ins').style.display='block';
+  document.getElementById('consol-ins-txt').textContent='OCR '+OCR.toFixed(1)+', est. settlement '+settlement.toFixed(0)+' mm — '+state+timeMsg;
+  results.consolidation={Cc:Cc.toFixed(3),Cs:Cs.toFixed(3),OCR:OCR.toFixed(1),sett:settlement.toFixed(0),d:d.toFixed(3),t50,t90,tU,drainage:drainType,U:Usel,state};
+  dC('consolC');const s=getS();const ax=aX(s,'Effective stress σ′ (kPa)','Void ratio, e',{x:{type:'logarithmic'}});
+  charts.consolC=new Chart(document.getElementById('consolC').getContext('2d'),{type:'scatter',data:{datasets:[{label:'e–log σ′',data:sig.map((sg,i)=>({x:sg,y:ev[i]})),borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,showLine:true,tension:0.15,fill:false,borderWidth:s.lw}]},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ BEARING ══════ */
+function runBearing(){
+  const c=parseFloat(document.getElementById('BC-c').value)||0,phi=parseFloat(document.getElementById('BC-phi').value)||0;
+  const gam=parseFloat(document.getElementById('BC-gam').value)||18,Df=parseFloat(document.getElementById('BC-Df').value)||1.5;
+  const B=parseFloat(document.getElementById('BC-B').value)||2,shape=document.getElementById('BC-shape').value;
+  const FS=parseFloat(document.getElementById('BC-FS').value)||3,phiR=phi*Math.PI/180;
+  const Nq=Math.pow(Math.tan(Math.PI/4+phiR/2),2)*Math.exp(Math.PI*Math.tan(phiR));
+  const Nc=phi>0?(Nq-1)/Math.tan(phiR):5.14,Ng=2*(Nq+1)*Math.tan(phiR);
+  let sc=1,sq=1,sg=1;if(shape==='square'){sc=1.3;sg=0.8;}else if(shape==='circle'){sc=1.3;sg=0.6;}
+  const qu=c*Nc*sc+gam*Df*Nq*sq+0.5*gam*B*Ng*sg,qa=qu/FS;
+  document.getElementById('QU').textContent=qu.toFixed(0);document.getElementById('QA').textContent=qa.toFixed(0);document.getElementById('NF').textContent=Nc.toFixed(1)+'/'+Nq.toFixed(1)+'/'+Ng.toFixed(1);
+  let rec=qa>300?'Excellent — suitable for heavy structures.':qa>150?'Good — standard footing design applicable.':qa>75?'Moderate — consider raft or reduced loads.':'Low — deep foundation or ground improvement required.';
+  document.getElementById('bear-ins').style.display='block';document.getElementById('bear-ins-txt').textContent='qᵤ='+qu.toFixed(0)+' kPa, qₐ='+qa.toFixed(0)+' kPa (FS='+FS+') — '+rec;
+  results.bearing={qu:qu.toFixed(0),qa:qa.toFixed(0),Nc:Nc.toFixed(1),Nq:Nq.toFixed(1),Ng:Ng.toFixed(1),phi,c,shape,FS,rec};
+  dC('bearC');const s=getS();const phiVals=[],qaVals=[];
+  for (let p2 = 0; p2 <= 45; p2 += 3) {
+    const pr = p2 * Math.PI / 180;
+    const nq2 = Math.pow(Math.tan(Math.PI / 4 + pr / 2), 2) * Math.exp(Math.PI * Math.tan(pr));
+    const nc2 = p2 > 0 ? (nq2 - 1) / Math.tan(pr) : 5.14;
+    const ng2 = 2 * (nq2 + 1) * Math.tan(pr);
+    const qu2 = (c * nc2 * sc) + (gam * Df * nq2 * sq) + (0.5 * gam * B * ng2 * sg);
+    phiVals.push(p2);
+    qaVals.push(+(qu2 / FS).toFixed(1));
+  }
+  const ax=aX(s,'Friction angle φ (°)','Allowable bearing capacity qₐ (kPa)',{y:{min:0}});
+  charts.bearC=new Chart(document.getElementById('bearC').getContext('2d'),{type:'line',data:{labels:phiVals,datasets:[{label:'qₐ vs φ',data:qaVals,borderColor:s.col.p,backgroundColor:s.col.fill,pointRadius:s.pt,pointStyle:s.ptS,tension:0.4,fill:true,borderWidth:s.lw},{label:'Design point φ='+phi+'°',data:phiVals.map(p2=>Math.abs(p2-phi)<2?qa:null),pointRadius:s.pt*2,pointStyle:'star',pointBackgroundColor:s.col.a,type:'scatter',showLine:false}]},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ PET ══════ */
+function calcPET(r,i,lat,elev){
+  const T=r[0],RH=r[1],u=r[2],n=r[3];
+  const ew=0.6108*Math.exp(17.27*T/(T+237.3)),ea=RH/100*ew,delta=4098*ew/Math.pow(T+237.3,2);
+  const P2=101.3*Math.pow((293-0.0065*elev)/293,5.26),gamma=0.000665*P2;
+  const J=15+30*i,dr=1+0.033*Math.cos(2*Math.PI*J/365),dec=0.409*Math.sin(2*Math.PI*J/365-1.39);
+  const latR=lat*Math.PI/180,ws=Math.acos(Math.max(-1,Math.min(1,-Math.tan(latR)*Math.tan(dec))));
+  const Ra=24*60/Math.PI*0.0820*dr*(ws*Math.sin(latR)*Math.sin(dec)+Math.cos(latR)*Math.cos(dec)*Math.sin(ws));
+  const Ns=24*ws/Math.PI,Rs=(0.25+0.50*(n/Math.max(Ns,0.1)))*Ra;
+  const Rns=0.77*Rs,Rnl=4.903e-9*Math.pow(T+273.16,4)*(0.34-0.14*Math.sqrt(Math.max(0,ea)))*(1.35*(Rs/Math.max(Ra*0.75,0.01))-0.35);
+  const Hn=Math.max(Rns-Math.max(0,Rnl),0);
+  return Math.max((delta/(delta+gamma))*Hn/2.45+(gamma/(delta+gamma))*6.43*(0.26+0.54*u)*(ew-ea),0)*30;
+}
+function runPET(){
+  const rows=pCSV(document.getElementById('petD').value);if(rows.length<12){alert('Need 12 rows');return;}
+  const lat=parseFloat(document.getElementById('LAT').value),elev=parseFloat(document.getElementById('ELEV').value);
+  const pv=rows.map((r,i)=>calcPET(r,i,lat,elev));
+  const ann=pv.reduce((a,b)=>a+b,0);const pkI=pv.indexOf(Math.max(...pv)),mnI=pv.indexOf(Math.min(...pv));
+  document.getElementById('PET-ann').textContent=ann.toFixed(0);document.getElementById('PET-pk').textContent=MO[pkI];document.getElementById('PET-mn').textContent=MO[mnI];
+  document.getElementById('pet-tb').innerHTML=pv.map((v,i)=>`<tr><td>${MO[i]}</td><td>${rows[i][0].toFixed(1)}</td><td>${rows[i][1].toFixed(0)}</td><td>${rows[i][2].toFixed(1)}</td><td>${rows[i][3].toFixed(1)}</td><td>${v.toFixed(2)}</td></tr>`).join('');
+  document.getElementById('pet-tbl').style.display='block';
+  results.pet={annual:ann.toFixed(0),vals:pv,peak:MO[pkI],mn:MO[mnI],rows};
+  dC('petC');const s=getS();const ax=aX(s,'Month','PET (mm/month)',{x:{ticks:{autoSkip:false}},y:{min:0}});
+  charts.petC=new Chart(document.getElementById('petC').getContext('2d'),{type:'bar',data:{labels:MO,datasets:[{label:'PET (mm/month)',data:pv.map(v=>+v.toFixed(1)),backgroundColor:pv.map((_,i)=>i===pkI?s.col.p:'rgba(26,58,42,0.38)'),borderColor:s.col.p,borderWidth:1}]},options:{...pO(s),plugins:{legend:{display:false}},scales:ax}});
+}
+
+/* ══════ RUNOFF ══════ */
+function runRunoff(){
+  const cn=parseInt(document.getElementById('CN').value),P=parseFloat(document.getElementById('RP').value);
+  const amc=parseInt(document.getElementById('AMC').value),area=parseFloat(document.getElementById('CA').value);
+  let cnA=cn;if(amc===1)cnA=4.2*cn/(10-0.058*cn);if(amc===3)cnA=23*cn/(10+0.13*cn);cnA=Math.min(100,Math.max(1,cnA));
+  const S=25400/cnA-254,Ia=0.2*S,Q=P>Ia?Math.pow(P-Ia,2)/(P-Ia+S):0;
+  const vol=Q*area*1000,ratio=Q/Math.max(P,0.01);
+  document.getElementById('RQ').textContent=Q.toFixed(2);document.getElementById('RV').textContent=vol.toFixed(0);document.getElementById('RR').textContent=(ratio*100).toFixed(1)+'%';
+  const coeffText = 'runoff coefficient is high (C ≈ '+ratio.toFixed(2)+'). ';
+  let interp=ratio<0.2?'Low runoff — good infiltration, low flood risk.':ratio<0.5?'Moderate runoff — design stormwater drainage.':coeffText+'Peak discharge estimation via Rational Method or Unit Hydrograph is advised for drainage sizing.';
+  document.getElementById('run-ins').style.display='block';document.getElementById('run-ins-txt').textContent=interp;
+  results.runoff={Q:Q.toFixed(2),vol:vol.toFixed(0),ratio:(ratio*100).toFixed(1),cn,amc,area,interp};
+  dC('runC');const s=getS();const Ps=[],Qs=[];for(let pp=0;pp<=200;pp+=5){const q=pp>Ia?Math.pow(pp-Ia,2)/(pp-Ia+S):0;Ps.push(pp);Qs.push(+q.toFixed(2));}
+  const ax=aX(s,'Rainfall P (mm)','Runoff Q (mm)',{y:{min:0}});
+  charts.runC=new Chart(document.getElementById('runC').getContext('2d'),{type:'line',data:{labels:Ps,datasets:[{label:'SCS-CN curve',data:Qs,borderColor:s.col.s,backgroundColor:s.col.fill2,tension:0.3,fill:true,pointRadius:0,borderWidth:s.lw},{label:'Design storm P='+P+'mm',data:Ps.map(pp=>Math.abs(pp-P)<4?Q:null),pointRadius:s.pt*1.8,pointStyle:'star',pointBackgroundColor:s.col.a,type:'scatter',showLine:false}]},options:{...pO(s),scales:ax}});
+}
+
+/* ══════ GANTT ══════ */
+const GCLRS=['#1a3a2a','#185FA5','#8B1A1A','#5B3A8B','#7A4A00','#0F6E56','#2C5F2E','#888780'];
+function runGantt(){
+  const raw=document.getElementById('G-data').value.trim().split('\n');const tw=parseInt(document.getElementById('G-wk').value)||18;const title=document.getElementById('G-title').value;
+  document.getElementById('gantt-hl').textContent=title;
+  const tasks=raw.map(l=>{const p=l.split(',');return{name:p[0]?.trim(),start:parseInt(p[1]),dur:parseInt(p[2])};}).filter(t=>t.name&&!isNaN(t.start)&&!isNaN(t.dur));
+  const wkL=Array.from({length:tw},(_,i)=>'W'+(i+1));
+  let html=`<div style="display:flex;margin-bottom:4px"><div style="width:115px"></div><div style="flex:1;display:flex">${wkL.map(w=>`<div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-tertiary)">${w}</div>`).join('')}</div></div>`;
+  tasks.forEach((t,i)=>{const s2=Math.max(0,t.start-1),e2=Math.min(tw,t.start-1+t.dur);const lft=(s2/tw*100).toFixed(1),wid=((e2-s2)/tw*100).toFixed(1);html+=`<div style="display:flex;align-items:center;margin-bottom:4px"><div class="gantt-label" title="${t.name}">${t.name}</div><div class="gantt-track"><div class="gantt-bar" style="left:${lft}%;width:${wid}%;background:${GCLRS[i%GCLRS.length]}">${t.dur}w</div></div></div>`;});
+  html+=`<div style="margin-top:5px;font-size:9px;color:var(--color-text-tertiary)">By: ${document.getElementById('G-by').value}</div>`;
+  document.getElementById('gantt-out').innerHTML=html;results.gantt={tasks:tasks.length,title};
+}
+function dlGantt(scale){
+  const raw=document.getElementById('G-data').value.trim().split('\n');const tw=parseInt(document.getElementById('G-wk').value)||18;const title=document.getElementById('G-title').value;const m=getMeta();
+  const tasks=raw.map(l=>{const p=l.split(',');return{name:p[0]?.trim(),start:parseInt(p[1]),dur:parseInt(p[2])};}).filter(t=>t.name&&!isNaN(t.start)&&!isNaN(t.dur));
+  const rowH=26,hH=70,fH=42,tSX=136,tW=816-tSX,W=900,H=hH+tasks.length*rowH+fH+14;
+  const cvs=document.createElement('canvas');cvs.width=W*scale;cvs.height=H*scale;const ctx=cvs.getContext('2d');ctx.scale(scale,scale);
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#1a3a2a';ctx.font='bold 13px Georgia,serif';ctx.fillText(title,14,22);
+  ctx.fillStyle='#555';ctx.font='8.5px Georgia,serif';ctx.fillText('Project: '+m.name+'  |  By: '+m.by+'  |  '+m.date,14,36);
+  ctx.strokeStyle='#ddd';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(0,44);ctx.lineTo(W,44);ctx.stroke();
+  for(let w=0;w<tw;w++){const x=tSX+w/tw*tW;if(w%2===0){ctx.fillStyle='#f7f7f7';ctx.fillRect(x,48,tW/tw,H-fH-48);}ctx.fillStyle='#aaa';ctx.font='7.5px Georgia,serif';ctx.textAlign='center';ctx.fillText('W'+(w+1),x+tW/tw/2,62);}
+  ctx.textAlign='left';
+  tasks.forEach((t,i)=>{const y=66+i*rowH;ctx.fillStyle='#333';ctx.font='9.5px Georgia,serif';ctx.fillText(t.name.substring(0,17),8,y+13);const sx=tSX+(t.start-1)/tw*tW,bw=t.dur/tw*tW;ctx.fillStyle=GCLRS[i%GCLRS.length];ctx.beginPath();if(ctx.roundRect)ctx.roundRect(sx,y+2,Math.max(bw,3),rowH-6,2);else ctx.rect(sx,y+2,Math.max(bw,3),rowH-6);ctx.fill();ctx.fillStyle='#fff';ctx.font='7.5px Georgia,serif';if(bw>18)ctx.fillText(t.dur+'w',sx+3,y+14);ctx.strokeStyle='#eee';ctx.lineWidth=0.4;ctx.beginPath();ctx.moveTo(0,y+rowH);ctx.lineTo(W,y+rowH);ctx.stroke();});
+  const fy=H-fH+8;ctx.fillStyle='#f0f0f0';ctx.fillRect(0,fy-8,W,fH);ctx.strokeStyle='#ddd';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(0,fy-8);ctx.lineTo(W,fy-8);ctx.stroke();
+  ctx.fillStyle='#555';ctx.font='8px Georgia,serif';ctx.textAlign='left';ctx.fillText('GeoYantra Pro  |  '+m.name+(m.ref?' | '+m.ref:'')+'  |  '+m.date,12,fy+8);
+  if(m.wm){ctx.save();ctx.globalAlpha=0.06;ctx.font='bold 55px Georgia,serif';ctx.fillStyle='#000';ctx.translate(W/2,(H-fH)/2);ctx.rotate(-0.25);ctx.textAlign='center';ctx.fillText(m.wm,0,0);ctx.restore();}
+  const a=document.createElement('a');a.download='Gantt_'+(scale===1?'':scale===3?'_300dpi':'_500dpi')+'GeoYantra.png';a.href=cvs.toDataURL('image/png',1);a.click();
+}
+
+/* ══════ IMPORTS ══════ */
+function importGrad(inp){
+  const f=inp.files[0];if(!f)return;const rdr=new FileReader();
+  rdr.onload=e=>{try{let sR=[],hR=[];if(f.name.match(/\.csv|\.txt/i)){const ls=e.target.result.trim().split('\n');ls.forEach(l=>{const p=l.trim().split(/[,\t]/);if(p.length>=2){const sz=parseFloat(p[0]),pct=parseFloat(p[1]);if(!isNaN(sz)&&!isNaN(pct)){if(sz>=0.075)sR.push(sz+','+pct);else hR.push(sz+','+pct);}}});}else{const wb=XLSX.read(e.target.result,{type:'binary'});const ws=wb.Sheets[wb.SheetNames[0]];const data=XLSX.utils.sheet_to_json(ws,{header:1});data.forEach((row,i)=>{if(i===0)return;const sz=parseFloat(row[0]),pct=parseFloat(row[1]);if(!isNaN(sz)&&!isNaN(pct)){if(sz>=0.075)sR.push(sz+','+pct);else hR.push(sz+','+pct);}});}
+  if(sR.length)document.getElementById('sd').value=sR.join('\n');if(hR.length)document.getElementById('hd').value=hR.join('\n');alert('Imported '+sR.length+' sieve + '+hR.length+' hydrometer rows.');}catch(err){alert('Error: '+err);}};
+  if(f.name.match(/\.csv|\.txt/i))rdr.readAsText(f);else rdr.readAsBinaryString(f);inp.value='';
+}
+function importPET(inp){
+  const f=inp.files[0];if(!f)return;const rdr=new FileReader();
+  rdr.onload=e=>{try{let data=[];if(f.name.match(/\.csv|\.txt/i)){const ls=e.target.result.trim().split('\n');ls.forEach((l,i)=>{if(i===0&&isNaN(parseFloat(l.split(/[,\t]/)[0])))return;const p=l.trim().split(/[,\t]/).map(v=>parseFloat(v));if(p.length>=4&&!isNaN(p[0]))data.push(p);});}else{const wb=XLSX.read(e.target.result,{type:'binary'});const ws=wb.Sheets[wb.SheetNames[0]];const raw=XLSX.utils.sheet_to_json(ws,{header:1});raw.forEach((row,i)=>{if(i===0)return;const p=row.map(v=>parseFloat(v));if(p.length>=4&&!isNaN(p[0]))data.push(p);});}
+  if(data.length<12){alert('Need 12 rows.');return;}document.getElementById('petD').value=data.slice(0,12).map(r=>r.slice(0,4).join(',')).join('\n');alert('12 months imported.');}catch(err){alert('Error: '+err);}};
+  if(f.name.match(/\.csv|\.txt/i))rdr.readAsText(f);else rdr.readAsBinaryString(f);inp.value='';
+}
+function exportPETExcel(){
+  if(!results.pet){alert('Run PET first.');return;}const m=getMeta();const rows=results.pet.rows||[];const wb=XLSX.utils.book_new();
+  const hdr=[['GeoYantra Pro — PET Calculation'],['Project:',m.name,'Ref:',m.ref,'Date:',m.date,'By:',m.by],[''],['Month','Temp (°C)','RH (%)','Wind (m/s)','Sun (hrs)','PET (mm)']];
+  const dr=results.pet.vals.map((v,i)=>[MO[i],rows[i]?rows[i][0].toFixed(1):'',rows[i]?rows[i][1].toFixed(0):'',rows[i]?rows[i][2].toFixed(1):'',rows[i]?rows[i][3].toFixed(1):'',v.toFixed(2)]);
+  const ws=XLSX.utils.aoa_to_sheet([...hdr,...dr,[[''],['Annual PET',results.pet.annual]]]);XLSX.utils.book_append_sheet(wb,ws,'PET');XLSX.writeFile(wb,'GeoYantra_PET.xlsx');
+}
+
+function refreshAll(){
+  if(results.gradation)runGrad();if(results.plasticity)runPlast();if(results.cbr)runCBR();
+  if(results.compaction)runComp();if(results.consolidation)runConsol();if(results.bearing)runBearing();
+  if(results.pet)runPET();if(results.runoff)runRunoff();if(results.hydrometer)runHydrometer();if(results.blend)runBlend();
+}
+
+/* ══════ PDF REPORT ══════ */
+const TEST_DEFS=[
+  {id:'gradation',label:'Soil gradation (PSD)',sub:'D10–D60, Cu, Cc, USCS classification',chartId:'gradC'},
+  {id:'hydrometer',label:'Hydrometer analysis (ASTM D422)',sub:'151H method, D, P, Pa with Ct table',chartId:'hydroC'},
+  {id:'plasticity',label:'Plasticity / Atterberg limits',sub:'LL, PL, PI, LI, Activity, Casagrande',chartId:'plastC'},
+  {id:'cbr',label:'CBR analysis',sub:'CBR @ 2.5mm & 5mm, governing value',chartId:'cbrC'},
+  {id:'compaction',label:'Proctor compaction',sub:'OMC, MDD, ZAV line',chartId:'compC'},
+  {id:'consolidation',label:'Consolidation (oedometer)',sub:'Cc, Cs, OCR, settlement estimate',chartId:'consolC'},
+  {id:'bearing',label:'Bearing capacity (Terzaghi)',sub:'qᵤ, qₐ, Nc/Nq/Nγ',chartId:'bearC'},
+  {id:'pet',label:'PET (Penman combination)',sub:'Monthly PET, annual total',chartId:'petC'},
+  {id:'runoff',label:'Surface runoff (SCS-CN)',sub:'Q, volume, runoff ratio',chartId:'runC'},
+];
+function buildChecklist(){
+  document.getElementById('pdf-checklist').innerHTML=TEST_DEFS.map(t=>{const has=!!results[t.id];return`<div class="chk-item${has?' selected':''}" id="chk-${t.id}" onclick="toggleChk('${t.id}')"><div class="chk-box"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="chk-lbl">${t.label}</div><div class="chk-sub">${t.sub}</div></div><div class="chk-status">${has?'<span class="pill pg">Done</span>':'<span style="font-size:10px;color:var(--color-text-tertiary)">No data</span>'}</div></div>`;}).join('');
+}
+function toggleChk(id){document.getElementById('chk-'+id)?.classList.toggle('selected');updatePreview();}
+function updatePreview(){
+  const m=getMeta();document.getElementById('prev-title').textContent=document.getElementById('pdf-report-title').value;document.getElementById('prev-meta').textContent='Project: '+m.name+' | Ref: '+m.ref+' | '+m.date;
+  const sel=TEST_DEFS.filter(t=>document.getElementById('chk-'+t.id)?.classList.contains('selected')&&results[t.id]);
+  document.getElementById('prev-content').innerHTML=sel.length?'<div style="font-size:11px">'+sel.map((t,i)=>'<div style="padding:2px 0;border-bottom:0.5px solid #ddd">'+(i+1)+'. '+t.label+'</div>').join('')+'</div>':'No completed tests selected.';
+}
+function genPDF(){
+  const m=getMeta();const selected=TEST_DEFS.filter(t=>document.getElementById('chk-'+t.id)?.classList.contains('selected')&&results[t.id]);
+  if(!selected.length){alert('Select at least one completed test.');return;}
+  const rTitle=document.getElementById('pdf-report-title').value,sub=document.getElementById('pdf-subtitle').value,std=document.getElementById('pdf-std').value;
+  let html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${rTitle}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,serif;font-size:11pt;color:#1a1a1a;line-height:1.6}.cover{page-break-after:always;padding:60px 50px;border-left:6px solid #1a3a2a;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between}.logo-name{font-size:22pt;font-weight:bold;color:#1a3a2a}.logo-name em{color:#1D9E75;font-style:normal}.logo-sub{font-size:9pt;color:#777;letter-spacing:0.4px;margin-bottom:50px}.cover-title{font-size:20pt;font-weight:bold;margin-bottom:8px;line-height:1.3}.cover-sub{font-size:12pt;color:#555;margin-bottom:28px}.cover-bar{width:60px;height:3px;background:#1D9E75;margin-bottom:28px}.meta-t{width:100%;border-collapse:collapse;font-size:10pt}.meta-t td{padding:5px 10px 5px 0;vertical-align:top}.meta-t td:first-child{color:#555;width:120px}.cover-foot{font-size:8.5pt;color:#888;border-top:0.5px solid #ddd;padding-top:10px}.section{page-break-before:always;padding:40px 50px}.sec-hdr{border-bottom:2px solid #1a3a2a;padding-bottom:8px;margin-bottom:20px}.sec-num{font-size:9pt;color:#1D9E75;font-weight:bold;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}.sec-title{font-size:15pt;font-weight:bold}.sec-std{font-size:8.5pt;color:#777;margin-top:3px}.rt{width:100%;border-collapse:collapse;margin:14px 0;font-size:10pt}.rt th{background:#1a3a2a;color:#fff;padding:7px 12px;text-align:left;font-size:9.5pt;font-weight:normal}.rt td{padding:6px 12px;border-bottom:0.5px solid #e0e0e0;vertical-align:top}.rt tr:nth-child(even) td{background:#f8f8f6}.rt td:first-child{color:#444;width:60%}.ib{border-left:4px solid #1D9E75;padding:9px 13px;background:#f0faf6;margin:12px 0;font-size:10pt;color:#0F6E56;line-height:1.55}.cb{margin:18px 0;text-align:center}.cb img{max-width:100%;border:0.5px solid #ddd;border-radius:4px}.cb-cap{font-size:8.5pt;color:#666;margin-top:5px;font-style:italic}.risk-s{page-break-before:always;padding:40px 50px}.risk-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:10pt}.risk-lbl{width:160px;color:#333}.risk-bg{flex:1;height:10px;background:#eee;border-radius:5px;overflow:hidden}.risk-fill{height:100%;border-radius:5px}@media print{body{margin:0}}</style></head><body>`;
+  html+=`<div class="cover"><div><div class="logo-name">Geo<em>Yantra</em> Pro</div><div class="logo-sub">Geotechnical &amp; Hydrological Analysis Platform</div><div class="cover-title">${rTitle}</div><div class="cover-sub">${sub}</div><div class="cover-bar"></div><table class="meta-t"><tr><td>Project</td><td>${m.name}</td></tr><tr><td>Reference</td><td>${m.ref}</td></tr><tr><td>Location</td><td>${m.loc}</td></tr><tr><td>Organisation</td><td>${m.org||'—'}</td></tr><tr><td>Prepared by</td><td>${m.by}</td></tr><tr><td>Checked by</td><td>${m.chk||'—'}</td></tr><tr><td>Date</td><td>${m.date}</td></tr><tr><td>Standard</td><td>${std}</td></tr><tr><td>Tests included</td><td>${selected.map(t=>t.label).join('; ')}</td></tr></table></div><div class="cover-foot">Generated by GeoYantra Pro. All calculations are based on user-entered data. Verify with a qualified geotechnical engineer before use in design.</div></div>`;
+  selected.forEach((t,i)=>{
+    const r=results[t.id];const sn=String(i+1).padStart(2,'0');
+    html+=`<div class="section"><div class="sec-hdr"><div class="sec-num">Section ${sn}</div><div class="sec-title">${t.label}</div><div class="sec-std">Standard: ${std}</div></div>`;
+    if(t.id==='gradation')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>USCS Classification</td><td>${r.cls}</td></tr><tr><td>D₁₀ (mm)</td><td>${r.D10}</td></tr><tr><td>D₃₀ (mm)</td><td>${r.D30}</td></tr><tr><td>D₆₀ (mm)</td><td>${r.D60}</td></tr><tr><td>Coefficient of Uniformity Cᵤ</td><td>${r.Cu}</td></tr><tr><td>Coefficient of Curvature C꜀</td><td>${r.Cc}</td></tr><tr><td>Fines (&lt;0.075mm)</td><td>${r.fines}%</td></tr><tr><td>Silt fraction</td><td>${r.silt}%</td></tr><tr><td>Clay fraction</td><td>${r.clay}%</td></tr></tbody></table><div class="ib">${r.interp}</div>`;
+    if(t.id==='hydrometer')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Specific gravity Gs</td><td>${r.Gs}</td></tr><tr><td>Dry mass W</td><td>${r.W} g</td></tr><tr><td>Temperature T</td><td>${r.T}°C</td></tr><tr><td>Temperature correction Ct</td><td>${r.Ct}</td></tr><tr><td>Viscosity factor K</td><td>${r.K}</td></tr><tr><td>Zero correction Zc</td><td>${r.Zc}</td></tr><tr><td>Meniscus correction Cm</td><td>${r.Cm}</td></tr><tr><td>% passing 75µm (P₇₅)</td><td>${r.P75}%</td></tr><tr><td>% clay (&lt;0.002mm, adjusted)</td><td>${r.claypct}%</td></tr><tr><td>% silt (adjusted)</td><td>${r.siltpct}%</td></tr><tr><td>D₅₀ (mm)</td><td>${r.d50}</td></tr></tbody></table><table class="rt" style="margin-top:10px"><thead><tr><th>t (min)</th><th>R</th><th>Rm</th><th>Rc</th><th>L (cm)</th><th>D (mm)</th><th>P (%)</th><th>Pa (%)</th></tr></thead><tbody>${r.tableRows.map(row=>`<tr><td>${row.t}</td><td>${row.R}</td><td>${row.Rm}</td><td>${row.Rc}</td><td>${row.L}</td><td>${row.D}</td><td>${row.P}</td><td>${row.Pa}</td></tr>`).join('')}</tbody></table><div class="ib">Adjusted % finer Pa = P × (P₇₅/100). Method per ASTM D422 using 151H hydrometer in 1000mL cylinder. L = 16.295 − 0.2645×Rm; D = K×√(L/t).</div>`;
+    if(t.id==='plasticity')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>USCS Classification</td><td>${r.cls}</td></tr><tr><td>Liquid Limit LL</td><td>${r.ll}%</td></tr><tr><td>Plastic Limit PL</td><td>${r.pl}%</td></tr><tr><td>Plasticity Index PI</td><td>${r.pi}%</td></tr></tbody></table><div class="ib">${r.interp}</div>`;
+    if(t.id==='cbr')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>CBR at 2.5mm</td><td>${r.c25}%</td></tr><tr><td>CBR at 5.0mm</td><td>${r.c50}%</td></tr><tr><td>Governing CBR</td><td>${r.gov}%</td></tr></tbody></table><div class="ib">${r.suit}</div>`;
+    if(t.id==='compaction')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Optimum Moisture Content (OMC)</td><td>${r.omc}%</td></tr><tr><td>Maximum Dry Density (MDD)</td><td>${r.mdd} kN/m³</td></tr><tr><td>Degree of saturation at OMC</td><td>${r.sr}%</td></tr><tr><td>Gs assumed</td><td>${r.Gs}</td></tr></tbody></table><div class="ib">${r.suit}</div>`;
+    if(t.id==='consolidation')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Compression Index Cc</td><td>${r.Cc}</td></tr><tr><td>Swelling Index Cs</td><td>${r.Cs}</td></tr><tr><td>OCR</td><td>${r.OCR}</td></tr><tr><td>Estimated primary settlement</td><td>${r.sett} mm</td></tr></tbody></table><div class="ib">${r.state}</div>`;
+    if(t.id==='bearing')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Cohesion c</td><td>${r.c} kPa</td></tr><tr><td>Friction angle φ</td><td>${r.phi}°</td></tr><tr><td>Shape</td><td>${r.shape}</td></tr><tr><td>Nc / Nq / Nγ</td><td>${r.Nc} / ${r.Nq} / ${r.Ng}</td></tr><tr><td>Ultimate bearing capacity qᵤ</td><td>${r.qu} kPa</td></tr><tr><td>Allowable qₐ (FS=${r.FS})</td><td>${r.qa} kPa</td></tr></tbody></table><div class="ib">${r.rec}</div>`;
+    if(t.id==='pet')html+=`<table class="rt"><thead><tr><th>Month</th><th>T°C</th><th>RH%</th><th>PET (mm)</th></tr></thead><tbody>${r.vals.map((v,mi)=>`<tr><td>${MO[mi]}</td><td>${r.rows&&r.rows[mi]?r.rows[mi][0].toFixed(1):'—'}</td><td>${r.rows&&r.rows[mi]?r.rows[mi][1].toFixed(0):'—'}</td><td>${v.toFixed(2)}</td></tr>`).join('')}<tr><td colspan="3"><strong>Annual Total</strong></td><td><strong>${r.annual} mm</strong></td></tr></tbody></table>`;
+    if(t.id==='runoff')html+=`<table class="rt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>CN</td><td>${r.cn} (AMC ${r.amc})</td></tr><tr><td>Catchment area</td><td>${r.area} km²</td></tr><tr><td>Direct runoff Q</td><td>${r.Q} mm</td></tr><tr><td>Runoff volume</td><td>${r.vol} m³</td></tr><tr><td>Runoff ratio</td><td>${r.ratio}%</td></tr></tbody></table><div class="ib">${r.interp}</div>`;
+    const cv=document.getElementById(t.chartId);
+    if(cv&&cv.width){try{html+=`<div class="cb"><img src="${cv.toDataURL('image/png',1)}" alt="${t.label}"><div class="cb-cap">Figure ${i+1}: ${t.label} — ${m.name}, ${m.date}</div></div>`;}catch(e){}}
+    html+=`</div>`;
+  });
+  const risks=[];
+  if(results.gradation){const rv=results.gradation.risk==='high'?85:results.gradation.risk==='moderate'?50:20;risks.push({l:'Settlement risk',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.plasticity){const pi=parseFloat(results.plasticity.pi);const rv=pi>17?85:pi>10?50:20;risks.push({l:'Shrink-swell risk',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.cbr){const g=parseFloat(results.cbr.gov);const rv=g<3?90:g<7?55:20;risks.push({l:'Pavement failure risk',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.consolidation){const ocr=parseFloat(results.consolidation.OCR);const rv=ocr<1.5?85:ocr<4?45:15;risks.push({l:'Consolidation risk',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(risks.length){html+=`<div class="risk-s"><div class="sec-hdr"><div class="sec-num">Risk Summary</div><div class="sec-title">Engineering risk profile</div></div>${risks.map(r=>`<div class="risk-row"><div class="risk-lbl">${r.l}</div><div class="risk-bg"><div class="risk-fill" style="width:${r.v}%;background:${r.c}"></div></div><div style="width:36px;text-align:right;font-weight:bold;color:${r.c}">${r.v}%</div></div>`).join('')}<p style="margin-top:16px;font-size:8.5pt;color:#888;font-style:italic">Risk indicators derived from computed parameters. Green &lt;35%, Amber 35–60%, Red &gt;60%. Review with a qualified engineer.</p></div>`;}
+  html+=`<div style="padding:40px 50px;border-top:3px solid #1a3a2a;margin-top:20px"><div style="font-size:9pt;color:#888">End of report — Generated by GeoYantra Pro | ${m.name} | ${m.date} | By ${m.by}</div></div></body></html>`;
+  const w=window.open('','_blank','width=920,height=700');if(!w){alert('Pop-up blocked. Allow pop-ups then retry.');return;}
+  w.document.write(html);w.document.close();setTimeout(()=>{w.focus();w.print();},900);
+}
+
+/* ══════ AI REPORT ══════ */
+async function genAI(){
+  const btn=document.querySelector('[onclick="genAI()"]');btn.textContent='Generating…';btn.disabled=true;
+  document.getElementById('ai-status').textContent='Calling Claude API…';
+  const m=getMeta(),summary=JSON.stringify(results,null,2);
+  const prompt=`You are a senior geotechnical engineer. Write a formal 350-word engineering interpretation report.\n\nProject: ${m.name} | Ref: ${m.ref} | Location: ${m.loc} | Date: ${m.date}\n\nResults:\n${summary}\n\nCover: soil characterization, USCS, key parameters, foundation suitability, risks, recommendations citing BS/ASTM/AASHTO. Formal prose, no bullet points.`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();const txt=data.content?.map(c=>c.text||'').join('\n')||'API error.';
+    document.getElementById('ai-out').textContent=txt;document.getElementById('ai-status').textContent='Report generated.';results.aiReport=txt;buildRisks();
+  }catch{document.getElementById('ai-out').textContent=localReport();document.getElementById('ai-status').textContent='Local engine used.';}
+  btn.textContent='Regenerate AI report';btn.disabled=false;
+}
+function localReport(){
+  const m=getMeta();let r=`ENGINEERING INTERPRETATION REPORT\n${'─'.repeat(48)}\nProject: ${m.name}  |  Ref: ${m.ref}\nLocation: ${m.loc}  |  Date: ${m.date}  |  By: ${m.by}\n\n`;
+  if(results.gradation){const g=results.gradation;r+=`1. SOIL CLASSIFICATION (USCS)\n${g.cls} — ${g.name||''}\n${g.interp}\nKey: Fines=${g.fines}%, % passing 4.75mm=${g.p475||'—'}%, D₁₀=${g.D10}mm, Cᵤ=${g.Cu}, C꜀=${g.Cc}\n\n`;}
+  if(results.hydrometer){const h=results.hydrometer;r+=`2. HYDROMETER ANALYSIS (ASTM D422)\nGs=${h.Gs}, W=${h.W}g, T=${h.T}°C, Ct=${h.Ct}, K=${h.K}\nClay(<0.002mm)=${h.claypct}%, Silt=${h.siltpct}%, D50=${h.d50}mm\n\n`;}
+  if(results.plasticity){const p=results.plasticity;r+=`3. PLASTICITY\n${p.cls} — LL=${p.ll}%, PL=${p.pl}%, PI=${p.pi}%\n${p.interp}\n\n`;}
+  if(results.cbr){r+=`4. CBR\nGoverning=${results.cbr.gov}%\n${results.cbr.suit}\n\n`;}
+  if(results.compaction){r+=`5. COMPACTION\nOMC=${results.compaction.omc}%, MDD=${results.compaction.mdd} kN/m³\n${results.compaction.suit}\n\n`;}
+  if(results.consolidation){const c=results.consolidation;r+=`6. CONSOLIDATION\nCc=${c.Cc}, OCR=${c.OCR}, Settlement=${c.sett}mm\n${c.state}\n\n`;}
+  if(results.bearing){const b=results.bearing;r+=`7. BEARING CAPACITY\nqᵤ=${b.qu} kPa, qₐ=${b.qa} kPa\n${b.rec}\n\n`;}
+  r+=`Generated by GeoYantra Pro`;return r;
+}
+function buildRisks(){
+  const risks=[];
+  if(results.gradation){const rv=results.gradation.risk==='high'?85:results.gradation.risk==='moderate'?50:20;risks.push({l:'Settlement',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.plasticity){const pi=parseFloat(results.plasticity.pi);const rv=pi>17?85:pi>10?50:20;risks.push({l:'Shrink-swell',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.cbr){const g=parseFloat(results.cbr.gov);const rv=g<3?90:g<7?55:20;risks.push({l:'Pavement failure',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(results.consolidation){const ocr=parseFloat(results.consolidation.OCR);const rv=ocr<1.5?85:ocr<4?45:15;risks.push({l:'Consolidation',v:rv,c:rv>60?'#A32D2D':rv>35?'#BA7517':'#1D9E75'});}
+  if(!risks.length)return;
+  document.getElementById('risk-panel').style.display='block';
+  document.getElementById('risk-rows').innerHTML=risks.map(r=>`<div class="ri"><div class="rl">${r.l}</div><div class="rbg"><div class="rb" style="width:${r.v}%;background:${r.c}"></div></div><div class="rpct">${r.v}%</div></div>`).join('');
+}
+function dlTxt(){const a=document.createElement('a');a.download='GeoYantra_Report.txt';a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(document.getElementById('ai-out').textContent||localReport());a.click();}
+function dlCSV(){
+  const m=getMeta();let csv='GeoYantra Pro — Summary\nProject,'+m.name+'\nRef,'+m.ref+'\n\nModule,Parameter,Value\n';
+  if(results.gradation){const g=results.gradation;csv+=`Gradation,Classification,${g.cls}\nGradation,D10,${g.D10}\nGradation,Cu,${g.Cu}\nGradation,Cc,${g.Cc}\nGradation,Fines%,${g.fines}\n`;}
+  if(results.hydrometer){const h=results.hydrometer;csv+=`Hydrometer,Clay%,${h.claypct}\nHydrometer,Silt%,${h.siltpct}\nHydrometer,D50,${h.d50}\n`;}
+  if(results.plasticity){csv+=`Plasticity,Class,${results.plasticity.cls}\nPlasticity,PI,${results.plasticity.pi}\n`;}
+  if(results.cbr)csv+=`CBR,Governing,${results.cbr.gov}%\n`;
+  if(results.compaction)csv+=`Compaction,OMC,${results.compaction.omc}%\nCompaction,MDD,${results.compaction.mdd}\n`;
+  if(results.consolidation)csv+=`Consolidation,Cc,${results.consolidation.Cc}\nConsolidation,OCR,${results.consolidation.OCR}\n`;
+  if(results.bearing)csv+=`Bearing,qa kPa,${results.bearing.qa}\n`;
+  if(results.pet)csv+=`PET,Annual mm,${results.pet.annual}\n`;
+  const a=document.createElement('a');a.download='GeoYantra_Summary.csv';a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.click();
+}
+
+function updateThemeToggleLabel(){
+  const btn=document.getElementById('theme-toggle');
+  if(!btn) return;
+  btn.textContent = document.body.classList.contains('dark') ? 'Light mode' : 'Dark mode';
+}
+function setTheme(theme){
+  const body=document.body;
+  if(theme==='dark') body.classList.add('dark');
+  else body.classList.remove('dark');
+  if(document.getElementById('ui-theme')) document.getElementById('ui-theme').value=theme;
+  updateThemeToggleLabel();
+  try{localStorage.setItem('uiTheme',theme);}catch(e){}
+}
+function toggleOnboarding(){
+  const tip=document.getElementById('onboarding-tip');
+  if(!tip) return;
+  if(tip.classList.contains('hidden')){
+    tip.classList.remove('hidden');
+    tip.classList.add('visible');
+  } else {
+    tip.classList.remove('visible');
+    tip.classList.add('hidden');
+  }
+}
+function hideOnboarding(){
+  const tip=document.getElementById('onboarding-tip');
+  if(!tip) return;
+  tip.classList.remove('visible');
+  tip.classList.add('hidden');
+  try{localStorage.setItem('onboardingDismissed','true');}catch(e){}
+}
+function showOnboardingOnce(){
+  if(typeof localStorage==='undefined') return;
+  if(!localStorage.getItem('onboardingDismissed')){
+    const tip=document.getElementById('onboarding-tip');
+    if(tip){
+      tip.classList.remove('hidden');
+      tip.classList.add('visible');
+    }
+  }
+}
+
+const savedTheme = (()=>{try{return localStorage.getItem('uiTheme');}catch(e){return null;}})();
+if(savedTheme && document.getElementById('ui-theme')){
+  document.getElementById('ui-theme').value=savedTheme;
+}
+if(document.getElementById('ui-theme')){
+  document.getElementById('ui-theme').addEventListener('change', e=>setTheme(e.target.value));
+}
+const themeToggleBtn=document.getElementById('theme-toggle');
+if(themeToggleBtn){
+  themeToggleBtn.addEventListener('click',()=>{
+    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+    setTheme(next);
+  });
+}
+setTheme(savedTheme||'light');
+showOnboardingOnce();
+document.getElementById('proj-disp').textContent='Project: '+document.getElementById('proj-name').value;
+setTimeout(()=>{runGrad();runPlast();runCBR();runComp();runConsol();runBearing();runPET();runRunoff();runGantt();runHydrometer();},600);
+</script>
